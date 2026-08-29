@@ -18,9 +18,13 @@ examples:
 	$(UV) run python examples/planar_driven_slider.py
 	$(UV) run python examples/planar_mass_spring.py
 	$(UV) run python examples/planar_slider_crank_analysis.py
+	$(UV) run python examples/planar_four_bar.py
+	$(UV) run python examples/planar_scotch_yoke.py
+	$(UV) run python examples/planar_pendulum.py
+	$(UV) run python examples/planar_energy_conservation.py
 
 gallery:
-	$(UV) run python scripts/generate_week1_gallery.py
+	$(UV) run python scripts/generate_gallery.py
 
 test:
 	$(UV) run pytest -q

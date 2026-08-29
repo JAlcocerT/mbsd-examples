@@ -27,9 +27,13 @@ pip install -e .[dev]
 uv run python examples/planar_driven_slider.py
 uv run python examples/planar_mass_spring.py
 uv run python examples/planar_slider_crank_analysis.py
+uv run python examples/planar_four_bar.py
+uv run python examples/planar_scotch_yoke.py
+uv run python examples/planar_pendulum.py
+uv run python examples/planar_energy_conservation.py
 ```
 
-Generate the Week 1 gallery:
+Generate the gallery:
 
 ```sh
 make gallery
@@ -56,9 +60,11 @@ examples/
 scripts/
 ```
 
-For `v0.1.0`, the gallery is deliberately small and reproducible. Larger GIFs,
-historical media, CAD/render outputs, notebooks, synthesis batches, and 3D
-animations should arrive in later weekly releases.
+For `v0.2.0`, the gallery remains small and reproducible while adding canonical
+planar mechanisms: four-bar linkage, scotch yoke, driven pendulum, and an
+undamped mass-spring energy check. Larger GIFs, historical media, CAD/render
+outputs, notebooks, synthesis batches, and 3D animations should arrive in
+later weekly releases.
 
 ## Agent Samples
 

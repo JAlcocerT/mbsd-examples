@@ -25,11 +25,11 @@ jobs:
         with:
           path: mbsd-examples
 
-      - name: Checkout MBSD Core
+      - name: Checkout MBSD Core release pair
         uses: actions/checkout@v4
         with:
           repository: JAlcocerT/mbsd-core
-          ref: v0.1.0
+          ref: v0.2.0
           path: mbsd-core
 
       - name: Set up Python

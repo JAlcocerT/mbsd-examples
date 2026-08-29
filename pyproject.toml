@@ -1,11 +1,11 @@
 [project]
 name = "mbsd-examples"
-version = "0.1.0"
+version = "0.2.0"
 description = "Runnable examples and gallery assets for MBSD Core."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "mbsd>=0.1.0",
+    "mbsd>=0.2.0",
     "matplotlib>=3.8,<4.0",
     "numpy>=2.0,<3.0",
 ]
@@ -48,13 +48,13 @@ requires = ["hatchling>=1.25"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = []
+packages = ["src/mbsd_examples"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
 [tool.uv]
-package = false
+package = true
 
 [tool.uv.sources]
 mbsd = { path = "../mbsd-core" }
