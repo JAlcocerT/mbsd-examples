@@ -9,6 +9,8 @@ Generated images:
 - `png/scotch-yoke.png`
 - `png/driven-pendulum.png`
 - `png/energy-conservation.png`
+- `png/precision-synthesis.png`
+- `png/function-fit.png`
 
 Regenerate them with:
 

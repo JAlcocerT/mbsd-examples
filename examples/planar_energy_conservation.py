@@ -35,7 +35,13 @@ def build_energy_model() -> tuple[object, np.ndarray, np.ndarray, Spring]:
 def run_analysis(nsteps: int = 301) -> dict[str, float]:
     mechanism, q0, v0, spring = build_energy_model()
     t = np.linspace(0.0, 1.5, nsteps)
-    result = mechanism.simulate(t, q0=q0, v0=v0, springs=[spring])
+    result = mechanism.simulate(
+        t,
+        q0=q0,
+        v0=v0,
+        springs=[spring],
+        allow_underconstrained=True,
+    )
     mechanism.assert_constraints_satisfied(result, tol=1e-7)
 
     x = result.q[3, :]
@@ -68,7 +74,13 @@ def save_plot(path: Path, nsteps: int = 301) -> None:
 
     mechanism, q0, v0, spring = build_energy_model()
     t = np.linspace(0.0, 1.5, nsteps)
-    result = mechanism.simulate(t, q0=q0, v0=v0, springs=[spring])
+    result = mechanism.simulate(
+        t,
+        q0=q0,
+        v0=v0,
+        springs=[spring],
+        allow_underconstrained=True,
+    )
     x = result.q[3, :]
     vx = result.v[3, :]
     energy = 0.5 * vx**2 + 0.5 * spring.k * (x - spring.l0) ** 2

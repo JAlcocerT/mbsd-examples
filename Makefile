@@ -22,6 +22,8 @@ examples:
 	$(UV) run python examples/planar_scotch_yoke.py
 	$(UV) run python examples/planar_pendulum.py
 	$(UV) run python examples/planar_energy_conservation.py
+	$(UV) run python examples/planar_precision_synthesis.py
+	$(UV) run python examples/planar_function_fit.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

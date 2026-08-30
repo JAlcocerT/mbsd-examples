@@ -33,7 +33,7 @@ Examples target:
 - driven pendulum
 - energy-conservation mass-spring example
 - refreshed PNG gallery with source scripts
-- buildable release artifacts for repository hygiene
+- buildable source release artifacts for repository hygiene
 
 Release order:
 
@@ -41,6 +41,34 @@ Release order:
 2. pin `mbsd-examples` CI to `mbsd-core` `v0.2.0`
 3. tag and release `mbsd-examples` `v0.2.0`
 4. update the website/docs with the new examples and release notes
+
+## v0.3.0
+
+Week 3 should add the first small 2D synthesis preview.
+
+Core target:
+
+- four-bar geometry helper
+- Grashof classification
+- closed-form Freudenstein three-precision-point synthesis
+- rocker-angle sweep and affine fitting helpers
+- no top-level API expansion
+
+Examples target:
+
+- precision-point synthesis example
+- rocker function fitting example
+- refreshed PNG gallery with synthesis plots
+- numerical regression assertions for example metrics
+- repo-first distribution notes so users clone and run the examples from source
+- keep optimization-heavy and notebook-style synthesis batches for later
+
+Release order:
+
+1. tag and release `mbsd-core` `v0.3.0`
+2. pin `mbsd-examples` CI to `mbsd-core` `v0.3.0`
+3. tag and release `mbsd-examples` `v0.3.0`
+4. update the website/docs with synthesis preview notes
 
 ## Planned Ladder
 
@@ -59,7 +87,7 @@ forces a change:
 
 Good candidates for future weekly releases:
 
-- synthesis demos
+- larger synthesis batches
 - browser/Pyodide examples
 - selected historical GIFs
 - notebooks

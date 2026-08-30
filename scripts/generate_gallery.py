@@ -23,7 +23,9 @@ sys.path.insert(0, str(ROOT))
 
 from examples.planar_energy_conservation import save_plot as save_energy_plot  # noqa: E402
 from examples.planar_four_bar import save_plot as save_four_bar_plot  # noqa: E402
+from examples.planar_function_fit import save_plot as save_function_fit_plot  # noqa: E402
 from examples.planar_pendulum import save_plot as save_pendulum_plot  # noqa: E402
+from examples.planar_precision_synthesis import save_plot as save_precision_synthesis_plot  # noqa: E402
 from examples.planar_scotch_yoke import save_plot as save_scotch_yoke_plot  # noqa: E402
 from examples.planar_slider_crank_analysis import build_slider_crank, run_analysis  # noqa: E402
 
@@ -78,7 +80,13 @@ def save_mass_spring() -> None:
     q0[3] = 1.5
     v0 = np.zeros(mechanism.ncoord)
     t = np.linspace(0.0, 1.0, 201)
-    result = mechanism.simulate(t, q0=q0, v0=v0, springs=[spring])
+    result = mechanism.simulate(
+        t,
+        q0=q0,
+        v0=v0,
+        springs=[spring],
+        allow_underconstrained=True,
+    )
 
     fig, ax = plt.subplots(figsize=(7.0, 4.0))
     ax.plot(result.t, result.q[3, :], color="#2563eb")
@@ -125,6 +133,8 @@ def main() -> None:
     save_scotch_yoke_plot(GALLERY / "scotch-yoke.png")
     save_pendulum_plot(GALLERY / "driven-pendulum.png")
     save_energy_plot(GALLERY / "energy-conservation.png")
+    save_precision_synthesis_plot(GALLERY / "precision-synthesis.png")
+    save_function_fit_plot(GALLERY / "function-fit.png")
     print(f"Generated gallery in {GALLERY}")
 
 

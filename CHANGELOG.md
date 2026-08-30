@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.3.0 - Week 3 Synthesis Preview
+
+Prepared release candidate for MBSD Core `v0.3.0`.
+
+- Add three-precision-point four-bar synthesis example.
+- Add rocker function fitting example.
+- Refresh the gallery generator and PNG list with synthesis outputs.
+- Add numerical regression assertions for example metrics.
+- Bound the paired core dependency to the compatible `0.3.x` release line and
+  keep CI pinned to `mbsd-core` `v0.3.0`.
+- Document the examples repo as repo-first: clone and run from source rather
+  than expecting the marker wheel to contain runnable examples and gallery
+  assets.
+- Keep synthesis scope narrow: no large optimization batches, notebooks, CAD,
+  or 3D examples in this release.
+
 ## v0.2.0 - Week 2 Examples
 
 Prepared release candidate for MBSD Core `v0.2.0`.
