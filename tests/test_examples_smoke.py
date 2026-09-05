@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT))
 
 from examples import planar_energy_conservation
 from examples import planar_export_handoff
+from examples import planar_diagnostics_panel
 from examples import planar_four_bar
 from examples import planar_function_fit
 from examples import planar_pendulum
@@ -91,6 +92,12 @@ def test_spatial_vocabulary_example_runs():
     assert "rotation det" in output
 
 
+def test_planar_diagnostics_panel_example_runs():
+    output = run_script("examples/planar_diagnostics_panel.py")
+    assert "Planar diagnostics panel" in output
+    assert "Jacobian rank" in output
+
+
 def test_gallery_script_runs():
     output = run_script("scripts/generate_gallery.py")
     assert "Generated gallery" in output
@@ -162,3 +169,12 @@ def test_spatial_vocabulary_metrics():
     assert metrics["model"]["schema"] == "mbsd.spatial.model"
     assert metrics["model"]["status"] == "experimental"
     assert metrics["rotation_det"] == pytest.approx(1.0, abs=1e-12)
+
+
+def test_planar_diagnostics_panel_metrics():
+    metrics = planar_diagnostics_panel.run_analysis()
+
+    assert metrics["constraint_norm"] < 1e-10
+    assert metrics["velocity_residual_norm"] < 1e-10
+    assert metrics["rank_degrees_of_freedom"] == 0
+    assert metrics["finite"]

@@ -34,6 +34,7 @@ uv run python examples/planar_precision_synthesis.py
 uv run python examples/planar_function_fit.py
 uv run python examples/planar_export_handoff.py
 uv run python examples/spatial_vocabulary.py
+uv run python examples/planar_diagnostics_panel.py
 ```
 
 Generate the gallery:
@@ -78,6 +79,9 @@ artifacts/export/
 
 The local `v0.5.0-dev` branch adds a minimal experimental spatial-vocabulary
 example for 3D poses, frames, and body metadata.
+
+The local `v0.6.0-dev` branch adds a diagnostics-panel example that reports
+configuration residuals, velocity residuals, Jacobian rank, and rank-based DOF.
 
 ## Agent Samples
 
