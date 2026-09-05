@@ -33,6 +33,7 @@ uv run python examples/planar_energy_conservation.py
 uv run python examples/planar_precision_synthesis.py
 uv run python examples/planar_function_fit.py
 uv run python examples/planar_export_handoff.py
+uv run python examples/spatial_vocabulary.py
 ```
 
 Generate the gallery:
@@ -74,6 +75,9 @@ mechanism JSON, result JSON, and trajectory CSV artifacts under:
 ```text
 artifacts/export/
 ```
+
+The local `v0.5.0-dev` branch adds a minimal experimental spatial-vocabulary
+example for 3D poses, frames, and body metadata.
 
 ## Agent Samples
 

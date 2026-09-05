@@ -15,6 +15,7 @@ from examples import planar_pendulum
 from examples import planar_precision_synthesis
 from examples import planar_scotch_yoke
 from examples import planar_slider_crank_analysis
+from examples import spatial_vocabulary
 
 
 def run_script(path: str) -> str:
@@ -84,6 +85,12 @@ def test_export_handoff_example_runs():
     assert "mechanism JSON" in output
 
 
+def test_spatial_vocabulary_example_runs():
+    output = run_script("examples/spatial_vocabulary.py")
+    assert "Spatial vocabulary" in output
+    assert "rotation det" in output
+
+
 def test_gallery_script_runs():
     output = run_script("scripts/generate_gallery.py")
     assert "Generated gallery" in output
@@ -147,3 +154,11 @@ def test_export_handoff_artifacts_are_created(tmp_path):
     assert '"schema": "mbsd.planar.mechanism"' in exports["mechanism_json"].read_text(
         encoding="utf-8"
     )
+
+
+def test_spatial_vocabulary_metrics():
+    metrics = spatial_vocabulary.run_example()
+
+    assert metrics["model"]["schema"] == "mbsd.spatial.model"
+    assert metrics["model"]["status"] == "experimental"
+    assert metrics["rotation_det"] == pytest.approx(1.0, abs=1e-12)
