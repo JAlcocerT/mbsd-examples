@@ -27,6 +27,7 @@ examples:
 	$(UV) run python examples/planar_export_handoff.py
 	$(UV) run python examples/spatial_vocabulary.py
 	$(UV) run python examples/planar_diagnostics_panel.py
+	$(UV) run python examples/spatial_kinematics_preview.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

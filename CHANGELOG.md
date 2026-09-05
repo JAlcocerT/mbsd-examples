@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.7.0-dev - 3D Kinematics Preview
+
+Local development branch only.
+
+- Add an experimental spatial kinematics example using point transforms and
+  spherical-joint residuals.
+- Move the examples package version to `0.7.0.dev0` and depend on local
+  `mbsd>=0.7.0.dev0,<0.8`.
+- Keep the example residual-based; no general 3D position solver is claimed yet.
+
 ## v0.6.0-dev - 2D Diagnostics Panel
 
 Local development branch only.

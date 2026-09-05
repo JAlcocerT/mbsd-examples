@@ -17,6 +17,7 @@ from examples import planar_precision_synthesis
 from examples import planar_scotch_yoke
 from examples import planar_slider_crank_analysis
 from examples import spatial_vocabulary
+from examples import spatial_kinematics_preview
 
 
 def run_script(path: str) -> str:
@@ -96,6 +97,12 @@ def test_planar_diagnostics_panel_example_runs():
     output = run_script("examples/planar_diagnostics_panel.py")
     assert "Planar diagnostics panel" in output
     assert "Jacobian rank" in output
+
+
+def test_spatial_kinematics_preview_example_runs():
+    output = run_script("examples/spatial_kinematics_preview.py")
+    assert "Spatial kinematics preview" in output
+    assert "max residual" in output
 
 
 def test_gallery_script_runs():
@@ -178,3 +185,10 @@ def test_planar_diagnostics_panel_metrics():
     assert metrics["velocity_residual_norm"] < 1e-10
     assert metrics["rank_degrees_of_freedom"] == 0
     assert metrics["finite"]
+
+
+def test_spatial_kinematics_preview_metrics():
+    metrics = spatial_kinematics_preview.run_analysis()
+
+    assert metrics["joint"]["kind"] == "spherical"
+    assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)

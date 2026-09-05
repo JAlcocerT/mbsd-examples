@@ -35,6 +35,7 @@ uv run python examples/planar_function_fit.py
 uv run python examples/planar_export_handoff.py
 uv run python examples/spatial_vocabulary.py
 uv run python examples/planar_diagnostics_panel.py
+uv run python examples/spatial_kinematics_preview.py
 ```
 
 Generate the gallery:
@@ -82,6 +83,9 @@ example for 3D poses, frames, and body metadata.
 
 The local `v0.6.0-dev` branch adds a diagnostics-panel example that reports
 configuration residuals, velocity residuals, Jacobian rank, and rank-based DOF.
+
+The local `v0.7.0-dev` branch adds an experimental 3D kinematics preview using
+point transforms and spherical-joint residuals.
 
 ## Agent Samples
 
