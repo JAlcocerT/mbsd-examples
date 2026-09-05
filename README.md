@@ -36,6 +36,7 @@ uv run python examples/planar_export_handoff.py
 uv run python examples/spatial_vocabulary.py
 uv run python examples/planar_diagnostics_panel.py
 uv run python examples/spatial_kinematics_preview.py
+uv run python examples/spatial_dynamics_preview.py
 ```
 
 Generate the gallery:
@@ -86,6 +87,9 @@ configuration residuals, velocity residuals, Jacobian rank, and rank-based DOF.
 
 The local `v0.7.0-dev` branch adds an experimental 3D kinematics preview using
 point transforms and spherical-joint residuals.
+
+The local `v0.8.0-dev` branch adds a limited experimental free-body dynamics
+preview for simple 3D state propagation.
 
 ## Agent Samples
 

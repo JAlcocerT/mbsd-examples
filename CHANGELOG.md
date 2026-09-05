@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.8.0-dev - 3D Dynamics Preview
+
+Local development branch only.
+
+- Add a limited spatial free-body dynamics example.
+- Move the examples package version to `0.8.0.dev0` and depend on local
+  `mbsd>=0.8.0.dev0,<0.9`.
+- Keep the example unconstrained and explicit about not being full 3D multibody
+  dynamics yet.
+
 ## v0.7.0-dev - 3D Kinematics Preview
 
 Local development branch only.

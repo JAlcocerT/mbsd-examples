@@ -18,6 +18,7 @@ from examples import planar_scotch_yoke
 from examples import planar_slider_crank_analysis
 from examples import spatial_vocabulary
 from examples import spatial_kinematics_preview
+from examples import spatial_dynamics_preview
 
 
 def run_script(path: str) -> str:
@@ -103,6 +104,12 @@ def test_spatial_kinematics_preview_example_runs():
     output = run_script("examples/spatial_kinematics_preview.py")
     assert "Spatial kinematics preview" in output
     assert "max residual" in output
+
+
+def test_spatial_dynamics_preview_example_runs():
+    output = run_script("examples/spatial_dynamics_preview.py")
+    assert "Spatial dynamics preview" in output
+    assert "final velocity" in output
 
 
 def test_gallery_script_runs():
@@ -192,3 +199,11 @@ def test_spatial_kinematics_preview_metrics():
 
     assert metrics["joint"]["kind"] == "spherical"
     assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)
+
+
+def test_spatial_dynamics_preview_metrics():
+    metrics = spatial_dynamics_preview.run_analysis()
+
+    assert metrics["steps"] == 11
+    assert metrics["final_velocity"][0] > 1.0
+    assert metrics["final_angular_velocity"][2] > 0.5
