@@ -32,6 +32,7 @@ uv run python examples/planar_pendulum.py
 uv run python examples/planar_energy_conservation.py
 uv run python examples/planar_precision_synthesis.py
 uv run python examples/planar_function_fit.py
+uv run python examples/planar_export_handoff.py
 ```
 
 Generate the gallery:
@@ -66,6 +67,13 @@ For `v0.3.0`, the gallery remains small and reproducible while adding a first
 function fitting. Larger GIFs, historical media, CAD/render outputs, notebooks,
 larger synthesis batches, and 3D animations should arrive in later weekly
 releases.
+
+The local `v0.4.0-dev` branch adds a first export-handoff example that writes
+mechanism JSON, result JSON, and trajectory CSV artifacts under:
+
+```text
+artifacts/export/
+```
 
 ## Agent Samples
 

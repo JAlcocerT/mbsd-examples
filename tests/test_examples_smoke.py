@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from examples import planar_energy_conservation
+from examples import planar_export_handoff
 from examples import planar_four_bar
 from examples import planar_function_fit
 from examples import planar_pendulum
@@ -77,6 +78,12 @@ def test_function_fit_example_runs():
     assert "RMS error" in output
 
 
+def test_export_handoff_example_runs():
+    output = run_script("examples/planar_export_handoff.py")
+    assert "Planar export handoff" in output
+    assert "mechanism JSON" in output
+
+
 def test_gallery_script_runs():
     output = run_script("scripts/generate_gallery.py")
     assert "Generated gallery" in output
@@ -128,3 +135,15 @@ def test_dynamics_and_synthesis_metrics_regression():
     assert precision["grashof"] == "crank-rocker"
     assert function_fit["rms_error"] < 0.02
     assert function_fit["max_abs_error"] < 0.06
+
+
+def test_export_handoff_artifacts_are_created(tmp_path):
+    exports = planar_export_handoff.run_export(tmp_path)
+
+    assert exports["max_constraint_residual"] < 1e-9
+    assert exports["mechanism_json"].exists()
+    assert exports["result_json"].exists()
+    assert exports["trajectory_csv"].exists()
+    assert '"schema": "mbsd.planar.mechanism"' in exports["mechanism_json"].read_text(
+        encoding="utf-8"
+    )

@@ -79,16 +79,140 @@ forces a change:
 0.1.0: lean planar core and first runnable examples
 0.2.0: validation helpers and canonical planar example gallery
 0.3.0: 2D synthesis preview
-0.4.0: export and CAD bridge
-0.5.0: experimental 3D track
+0.4.0: export schema and CAD handoff bridge
+0.5.0: experimental 3D model vocabulary
+0.6.0: 2D solver hardening and API maturity
+0.7.0: 3D kinematics preview
+0.8.0: 3D dynamics preview
+0.9.0: integration and case-study track
+0.9.1+: additional curated examples, integrations, and case studies
 ```
+
+## v0.4.0
+
+Week 4 should make solved mechanisms portable without turning `mbsd-core` into a
+CAD package.
+
+Core target:
+
+- mechanism export schema for bodies, joints, drives, forces, metadata, and units
+- solved-result export schema for time histories, body poses, traces, and
+  validation summaries
+- JSON-first helpers such as `to_dict()` / `to_json()` style APIs
+- optional CSV helpers for trajectories and point traces
+- no FreeCAD, CadQuery, Blender, STEP, or heavy CAD dependencies in core runtime
+
+Examples target:
+
+- one mechanism JSON export example
+- one trajectory/point-trace CSV export example
+- one CAD-handoff example that produces neutral data a CAD/render tool could
+  consume later
+- small generated artifacts committed only when they are reproducible from source
+
+Local `v0.4.0-dev` work has started with a planar export-handoff example that
+writes mechanism JSON, result JSON, and trajectory CSV artifacts for downstream
+apps and CAD/render bridges.
+
+## v0.5.0
+
+Week 5 should start the 3D track as vocabulary and data modeling, not as a full
+3D solver claim.
+
+Core target:
+
+- experimental spatial namespace
+- body pose and rotation representation decision
+- coordinate and frame conventions
+- mass/inertia containers suitable for later spatial dynamics
+- basic joint data structures or sketches, clearly marked experimental
+- no promise of solved 3D kinematics or 3D dynamics yet
+
+Examples target:
+
+- minimal 3D pose/frame examples
+- export-oriented 3D geometry examples when useful
+- explicit notes that the 3D API can change before `1.0`
+
+## v0.6.0
+
+Week 6 should strengthen the existing 2D foundation before deeper 3D work.
+
+Core target:
+
+- cleaner internal constraint APIs
+- improved solver diagnostics and failure reports
+- offset center-of-mass dynamics support or a narrower documented boundary
+- optional stabilization/projection controls for constrained dynamics
+- stronger energy, residual, and regression tests
+
+Examples target:
+
+- examples that expose solver diagnostics
+- validation-heavy 2D mechanisms
+- comparison plots for residuals, energy, and solver behavior
+
+## v0.7.0
+
+Week 7 should introduce a 3D kinematics preview.
+
+Core target:
+
+- basic spatial constraints and Jacobian structure
+- one or two solved 3D kinematic mechanisms
+- explicit experimental namespace and warnings
+- no broad contact, collision, or multiphysics claims
+
+Examples target:
+
+- simple spatial kinematics examples
+- validation metrics for 3D position-level and velocity-level constraints
+
+## v0.8.0
+
+Week 8 should introduce a limited 3D dynamics preview only if the kinematic track
+is stable enough.
+
+Core target:
+
+- spatial mass/inertia use in constrained acceleration solves
+- basic 3D time integration for very small systems
+- clear limitations around contact, collision, and complex joints
+
+Examples target:
+
+- one or two minimal 3D dynamics examples
+- conservative validation metrics and failure-mode notes
+
+## v0.9.x
+
+The `0.9.x` line should be the public integration and case-study track. Use it to
+show credible applications without bloating `mbsd-core`.
+
+Core target:
+
+- only small API additions discovered through examples and integrations
+- compatibility fixes, diagnostics, export refinements, and performance cleanups
+- no notebook, media, website, or private-app code
+
+Examples target:
+
+- curated case studies
+- integration examples with CAD/render/data tools
+- notebooks where they add durable explanation
+- selected historical GIFs and plots with source scripts, captions, and
+  provenance
+- larger synthesis batches when they are reproducible
+
+Public browser/PWA work is intentionally not part of the OSS roadmap. A private
+PWA can build on top of `mbsd-core` and consume the same export/result schemas
+without becoming part of the public repos.
 
 ## Later Batches
 
 Good candidates for future weekly releases:
 
 - larger synthesis batches
-- browser/Pyodide examples
 - selected historical GIFs
 - notebooks
 - CAD/render handoff examples

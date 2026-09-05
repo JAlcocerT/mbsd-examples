@@ -24,6 +24,7 @@ examples:
 	$(UV) run python examples/planar_energy_conservation.py
 	$(UV) run python examples/planar_precision_synthesis.py
 	$(UV) run python examples/planar_function_fit.py
+	$(UV) run python examples/planar_export_handoff.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

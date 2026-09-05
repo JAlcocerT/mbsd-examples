@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.0-dev - Export Handoff
+
+Local development branch only.
+
+- Add a planar export-handoff example that writes mechanism JSON, result JSON,
+  and trajectory CSV artifacts.
+- Move the examples package version to `0.4.0.dev0` and depend on local
+  `mbsd>=0.4.0.dev0,<0.5`.
+- Keep generated handoff artifacts under ignored `artifacts/` output.
+- Keep public browser/PWA code outside the OSS repositories.
+
 ## v0.3.0 - Week 3 Synthesis Preview
 
 Prepared release candidate for MBSD Core `v0.3.0`.
