@@ -81,5 +81,6 @@ validation metrics visible for human review.
 
 ## Relationship To MBSD Core
 
-`mbsd-core` is the installable framework. This repository is a companion
-collection of examples, plots, and case-study material.
+[MBSD Core](https://github.com/JAlcocerT/mbsd-core) is the installable framework.
+This repository is its companion collection of runnable examples, plots, and
+case-study material.
