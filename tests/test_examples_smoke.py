@@ -1,8 +1,11 @@
 import subprocess
 import sys
+from importlib.metadata import version
 from pathlib import Path
 
 import pytest
+
+import mbsd_examples
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -30,6 +33,10 @@ def run_script(path: str) -> str:
         text=True,
     )
     return completed.stdout
+
+
+def test_package_version_matches_installed_metadata():
+    assert mbsd_examples.__version__ == version("mbsd-examples")
 
 
 def test_driven_slider_example_runs():
