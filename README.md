@@ -83,8 +83,16 @@ The payloads demonstrate explicit units, frame conventions, metadata, and a
 portable spring descriptor suitable for PWA prototyping and neutral CAD path
 handoffs. Generated files remain ignored because the example reproduces them.
 
-The local `v0.5.0-dev` branch adds a minimal experimental spatial-vocabulary
-example for 3D poses, frames, and body metadata.
+The local `v0.5.0-dev` branch adds a pendulum-like experimental spatial
+vocabulary example with a posed body, body-local frame, spherical world-pivot
+joint sketch, and versioned JSON output under:
+
+```text
+artifacts/spatial/
+```
+
+It demonstrates a geometry/export vocabulary only. It does not solve spatial
+constraints, kinematics, or dynamics, and the API may change before `1.0`.
 
 ## Agent Samples
 

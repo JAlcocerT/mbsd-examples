@@ -188,9 +188,18 @@ def test_export_handoff_artifacts_are_created(tmp_path):
     assert len(point_rows) == 102
 
 
-def test_spatial_vocabulary_metrics():
-    metrics = spatial_vocabulary.run_example()
+def test_spatial_vocabulary_metrics(tmp_path):
+    metrics = spatial_vocabulary.run_example(tmp_path)
 
     assert metrics["model"]["schema"] == "mbsd.spatial.model"
+    assert metrics["model"]["schema_version"] == 1
     assert metrics["model"]["status"] == "experimental"
+    assert metrics["model"]["conventions"]["world_frame"] == "right_handed_xyz"
+    assert metrics["model"]["bodies"][0]["pose"]["translation"] == [1.0, 2.0, 0.5]
+    assert metrics["model"]["frames"][0]["parent_body"] == 0
+    assert metrics["model"]["joints"][0]["kind"] == "spherical"
+    assert metrics["model"]["joints"][0]["body_i"] is None
     assert metrics["rotation_det"] == pytest.approx(1.0, abs=1e-12)
+    assert metrics["model_json"].exists()
+    exported = json.loads(metrics["model_json"].read_text(encoding="utf-8"))
+    assert exported == metrics["model"]

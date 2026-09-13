@@ -134,9 +134,13 @@ Core target:
 
 Examples target:
 
-- minimal 3D pose/frame examples
-- export-oriented 3D geometry examples when useful
+- a pendulum-like posed-body, body-local-frame, and spherical-joint sketch
+- a versioned JSON spatial-model artifact for geometry handoff
 - explicit notes that the 3D API can change before `1.0`
+
+The implemented vocabulary uses right-handed XYZ coordinates, active
+body-to-world quaternions ordered `[w, x, y, z]`, SI units, and principal body
+inertia values about the center of mass. It remains data-only in this release.
 
 ## v0.6.0
 
