@@ -10,14 +10,18 @@ Local development branch only.
 - Keep the examples 3D scope to data modeling and pose/frame exports; no solved
   3D mechanism behavior is claimed yet.
 
-## v0.4.0-dev - Export Handoff
+## v0.4.0 - Export Handoff
 
-Local development branch only.
+Week 4 companion release for MBSD Core `v0.4.0`.
 
 - Add a planar export-handoff example that writes mechanism JSON, result JSON,
-  and trajectory CSV artifacts.
-- Move the examples package version to `0.4.0.dev0` and depend on local
-  `mbsd>=0.4.0.dev0,<0.5`.
+  trajectory CSV, and named-point JSON/CSV artifacts.
+- Demonstrate explicit SI units, coordinate conventions, caller metadata, and
+  a portable spring-damper descriptor for PWA/CAD consumers.
+- Parse and validate every generated handoff artifact in tests.
+- Move the examples package version to `0.4.0` and depend on
+  `mbsd>=0.4,<0.5`.
+- Expose the installed package version through `mbsd_examples.__version__`.
 - Keep generated handoff artifacts under ignored `artifacts/` output.
 - Keep public browser/PWA code outside the OSS repositories.
 

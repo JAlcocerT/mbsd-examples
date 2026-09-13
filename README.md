@@ -14,9 +14,17 @@ examples from source. The lightweight `mbsd_examples` package marker exists only
 for repository metadata and local release checks; the wheel is not the user-facing
 distribution for the examples, gallery images, or scripts.
 
-For local development next to `mbsd-core`:
+Clone both repositories as siblings because examples resolves the paired core
+checkout directly:
 
-```sh
+```bash
+mkdir mbsd-framework
+cd mbsd-framework
+git clone https://github.com/JAlcocerT/mbsd-core.git
+git clone https://github.com/JAlcocerT/mbsd-examples.git
+git -C mbsd-core checkout v0.4.0
+git -C mbsd-examples checkout v0.4.0
+cd mbsd-examples
 uv sync --extra dev
 ```
 
@@ -63,18 +71,17 @@ examples/
 scripts/
 ```
 
-For `v0.3.0`, the gallery remains small and reproducible while adding a first
-2D synthesis preview: three-precision-point four-bar synthesis and rocker
-function fitting. Larger GIFs, historical media, CAD/render outputs, notebooks,
-larger synthesis batches, and 3D animations should arrive in later weekly
-releases.
-
-The local `v0.4.0-dev` branch adds a first export-handoff example that writes
-mechanism JSON, result JSON, and trajectory CSV artifacts under:
+For `v0.4.0`, the gallery remains small and reproducible. The export-handoff
+example writes versioned mechanism and result JSON, a wide body-trajectory CSV,
+and named-point JSON/CSV files under:
 
 ```text
 artifacts/export/
 ```
+
+The payloads demonstrate explicit units, frame conventions, metadata, and a
+portable spring descriptor suitable for PWA prototyping and neutral CAD path
+handoffs. Generated files remain ignored because the example reproduces them.
 
 The local `v0.5.0-dev` branch adds a minimal experimental spatial-vocabulary
 example for 3D poses, frames, and body metadata.
@@ -93,5 +100,6 @@ validation metrics visible for human review.
 
 ## Relationship To MBSD Core
 
-`mbsd-core` is the installable framework. This repository is a companion
-collection of examples, plots, and case-study material.
+[MBSD Core](https://github.com/JAlcocerT/mbsd-core) is the installable framework.
+This repository is its companion collection of runnable examples, plots, and
+case-study material.
