@@ -1,3 +1,5 @@
+import csv
+import json
 import subprocess
 import sys
 from importlib.metadata import version
@@ -89,6 +91,7 @@ def test_export_handoff_example_runs():
     output = run_script("examples/planar_export_handoff.py")
     assert "Planar export handoff" in output
     assert "mechanism JSON" in output
+    assert "point trace JSON" in output
 
 
 def test_gallery_script_runs():
@@ -151,6 +154,28 @@ def test_export_handoff_artifacts_are_created(tmp_path):
     assert exports["mechanism_json"].exists()
     assert exports["result_json"].exists()
     assert exports["trajectory_csv"].exists()
-    assert '"schema": "mbsd.planar.mechanism"' in exports["mechanism_json"].read_text(
-        encoding="utf-8"
-    )
+    assert exports["point_json"].exists()
+    assert exports["point_csv"].exists()
+
+    mechanism = json.loads(exports["mechanism_json"].read_text(encoding="utf-8"))
+    result = json.loads(exports["result_json"].read_text(encoding="utf-8"))
+    point = json.loads(exports["point_json"].read_text(encoding="utf-8"))
+    with exports["trajectory_csv"].open(newline="", encoding="utf-8") as handle:
+        trajectory_rows = list(csv.reader(handle))
+    with exports["point_csv"].open(newline="", encoding="utf-8") as handle:
+        point_rows = list(csv.reader(handle))
+
+    assert mechanism["schema"] == "mbsd.planar.mechanism"
+    assert mechanism["schema_version"] == 1
+    assert mechanism["units"]["length"] == "m"
+    assert mechanism["metadata"]["consumer"] == ["pwa", "cad"]
+    assert mechanism["forces"]["springs"][0]["stiffness"] == 25.0
+    assert result["schema"] == "mbsd.planar.result"
+    assert result["diagnostics"]["max_constraint_residual"] < 1e-9
+    assert point["schema"] == "mbsd.planar.point_trace"
+    assert point["point"]["name"] == "slider_marker"
+    assert len(point["time"]) == 101
+    assert trajectory_rows[0][0] == "time_s"
+    assert len(trajectory_rows) == 102
+    assert point_rows[0][:3] == ["time_s", "x_m", "y_m"]
+    assert len(point_rows) == 102
