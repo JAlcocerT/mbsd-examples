@@ -1,16 +1,16 @@
 # Changelog
 
-## v0.5.0-dev - Experimental 3D Vocabulary
+## v0.5.0 - Experimental 3D Vocabulary
 
-Local development branch only.
+Week 5 companion release for MBSD Core `v0.5.0`.
 
 - Add a pendulum-like spatial vocabulary example with a posed body, body-local
   frame, and spherical world-pivot joint sketch.
 - Write and validate a versioned spatial-model JSON handoff artifact.
-- Move the examples package version to `0.5.0.dev0` and depend on local
-  `mbsd>=0.5.0.dev0,<0.6`.
-- Keep the examples 3D scope to data modeling and pose/frame/joint exports; no solved
-  3D mechanism behavior is claimed yet.
+- Move the examples package version to `0.5.0` and depend on
+  `mbsd>=0.5,<0.6`.
+- Keep the examples 3D scope to data modeling and pose/frame/joint exports; no
+  solved 3D mechanism behavior is claimed yet.
 
 ## v0.4.0 - Export Handoff
 

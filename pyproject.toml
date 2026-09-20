@@ -1,11 +1,11 @@
 [project]
 name = "mbsd-examples"
-version = "0.5.0.dev0"
+version = "0.5.0"
 description = "Runnable examples and gallery assets for MBSD Core."
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "mbsd>=0.5.0.dev0,<0.6",
+    "mbsd>=0.5,<0.6",
     "matplotlib>=3.8,<4.0",
     "numpy>=2.0,<3.0",
 ]

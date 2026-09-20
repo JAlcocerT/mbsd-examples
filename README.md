@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.4.0
-git -C mbsd-examples checkout v0.4.0
+git -C mbsd-core checkout v0.5.0
+git -C mbsd-examples checkout v0.5.0
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -83,9 +83,9 @@ The payloads demonstrate explicit units, frame conventions, metadata, and a
 portable spring descriptor suitable for PWA prototyping and neutral CAD path
 handoffs. Generated files remain ignored because the example reproduces them.
 
-The local `v0.5.0-dev` branch adds a pendulum-like experimental spatial
-vocabulary example with a posed body, body-local frame, spherical world-pivot
-joint sketch, and versioned JSON output under:
+The `v0.5.0` release adds a pendulum-like experimental spatial vocabulary
+example with a posed body, body-local frame, spherical world-pivot joint sketch,
+and versioned JSON output under:
 
 ```text
 artifacts/spatial/
