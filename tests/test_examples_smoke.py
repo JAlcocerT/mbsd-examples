@@ -215,7 +215,11 @@ def test_spatial_vocabulary_metrics(tmp_path):
 def test_planar_diagnostics_panel_metrics():
     metrics = planar_diagnostics_panel.run_analysis()
 
-    assert metrics["constraint_norm"] < 1e-10
-    assert metrics["velocity_residual_norm"] < 1e-10
-    assert metrics["rank_degrees_of_freedom"] == 0
-    assert metrics["finite"]
+    assert metrics["healthy"]["constraint_norm"] < 1e-10
+    assert metrics["healthy"]["velocity_residual_norm"] < 1e-10
+    assert metrics["healthy"]["classification"] == "fully_constrained"
+    assert metrics["healthy"]["finite"]
+    assert metrics["underconstrained"]["classification"] == "underconstrained"
+    assert metrics["underconstrained"]["rank_degrees_of_freedom"] == 1
+    assert metrics["rank_deficient"]["classification"] == "rank_deficient"
+    assert metrics["rank_deficient"]["singular"]

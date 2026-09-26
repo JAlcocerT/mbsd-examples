@@ -9,6 +9,8 @@ Local development branch only.
 - Move the examples package version to `0.6.0.dev0` and depend on local
   `mbsd>=0.6.0.dev0,<0.7`.
 - Keep the example focused on PWA-friendly status metrics rather than UI code.
+- Demonstrate healthy, underconstrained, and rank-deficient configurations.
+- Build paired core/examples distributions and smoke-test their wheels in CI.
 
 ## v0.5.0 - Experimental 3D Vocabulary
 

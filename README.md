@@ -95,8 +95,9 @@ artifacts/spatial/
 It demonstrates a geometry/export vocabulary only. It does not solve spatial
 constraints, kinematics, or dynamics, and the API may change before `1.0`.
 
-The local `v0.6.0-dev` branch adds a diagnostics-panel example that reports
-configuration residuals, velocity residuals, Jacobian rank, and rank-based DOF.
+The local `v0.6.0-dev` branch adds a diagnostics-panel example that compares
+healthy, underconstrained, and rank-deficient configurations using residuals,
+Jacobian rank, rank-based DOF, and explicit classification fields.
 
 ## Agent Samples
 

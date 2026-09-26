@@ -150,15 +150,21 @@ Core target:
 
 - cleaner internal constraint APIs
 - improved solver diagnostics and failure reports
-- offset center-of-mass dynamics support or a narrower documented boundary
+- consistent offset center-of-mass rejection at every unsupported dynamics API
+- genuine RK45 integration with caller initial velocities preserved
 - optional stabilization/projection controls for constrained dynamics
 - stronger energy, residual, and regression tests
+- hardened spatial value/export contracts before downstream solver work
+- distribution builds and installed-wheel smoke tests in CI
 
 Examples target:
 
 - examples that expose solver diagnostics
-- validation-heavy 2D mechanisms
-- comparison plots for residuals, energy, and solver behavior
+- healthy, underconstrained, and rank-deficient diagnostic states
+- comparison metrics for residuals, energy, and solver behavior
+
+This release is a readiness gate for later spatial solvers rather than a
+calendar-only milestone.
 
 ## v0.7.0
 

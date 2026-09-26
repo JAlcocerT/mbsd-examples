@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: JAlcocerT/mbsd-core
-          ref: v0.5.0
+          ref: v0.6.0-dev
           path: mbsd-core
 
       - name: Set up Python
@@ -45,3 +45,15 @@ jobs:
 
       - name: Run checks
         run: make check
+
+      - name: Build distributions
+        run: |
+          uv build
+          uv --directory ../mbsd-core build
+
+      - name: Smoke test built wheels
+        run: |
+          uv venv "$RUNNER_TEMP/mbsd-wheel-smoke"
+          uv pip install --python "$RUNNER_TEMP/mbsd-wheel-smoke/bin/python" ../mbsd-core/dist/mbsd-*.whl
+          uv pip install --python "$RUNNER_TEMP/mbsd-wheel-smoke/bin/python" --no-deps dist/mbsd_examples-*.whl
+          "$RUNNER_TEMP/mbsd-wheel-smoke/bin/python" -c "import mbsd, mbsd_examples; print(mbsd.__version__, mbsd_examples.__version__)"
