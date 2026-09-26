@@ -95,7 +95,8 @@ CAD package.
 
 Core target:
 
-- mechanism export schema for bodies, joints, drives, forces, metadata, and units
+- mechanism export schema for bodies, joints, drives, supported force
+  descriptors, metadata, and units
 - solved-result export schema for time histories, body poses, traces, and
   validation summaries
 - JSON-first helpers such as `to_dict()` / `to_json()` style APIs
@@ -110,9 +111,12 @@ Examples target:
   consume later
 - small generated artifacts committed only when they are reproducible from source
 
-Local `v0.4.0-dev` work has started with a planar export-handoff example that
-writes mechanism JSON, result JSON, and trajectory CSV artifacts for downstream
-apps and CAD/render bridges.
+The `v0.4.0` release provides versioned planar mechanism and result schemas,
+explicit SI units and coordinate conventions, portable spring-damper
+descriptors, caller metadata, wide trajectory CSV, and named body-point traces.
+The handoff example writes and validates each JSON/CSV artifact for downstream
+PWA and neutral CAD-path consumers. Arbitrary Python force callbacks remain
+outside the portable schema.
 
 ## v0.5.0
 
@@ -130,9 +134,13 @@ Core target:
 
 Examples target:
 
-- minimal 3D pose/frame examples
-- export-oriented 3D geometry examples when useful
+- a pendulum-like posed-body, body-local-frame, and spherical-joint sketch
+- a versioned JSON spatial-model artifact for geometry handoff
 - explicit notes that the 3D API can change before `1.0`
+
+The implemented vocabulary uses right-handed XYZ coordinates, active
+body-to-world quaternions ordered `[w, x, y, z]`, SI units, and principal body
+inertia values about the center of mass. It remains data-only in this release.
 
 ## v0.6.0
 
