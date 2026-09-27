@@ -172,15 +172,17 @@ Week 7 should introduce a 3D kinematics preview.
 
 Core target:
 
-- basic spatial constraints and Jacobian structure
-- one or two solved 3D kinematic mechanisms
+- spatial point-position, pose-composition, and inverse-transform helpers
+- spherical-joint point-coincidence residual evaluation
+- compact maximum-residual summaries
 - explicit experimental namespace and warnings
+- no general 3D position, velocity, or acceleration solver claim
 - no broad contact, collision, or multiphysics claims
 
 Examples target:
 
-- simple spatial kinematics examples
-- validation metrics for 3D position-level and velocity-level constraints
+- a spatial transform and spherical-joint residual example
+- an analytic geometry assertion and numerical residual metric
 
 ## v0.8.0
 

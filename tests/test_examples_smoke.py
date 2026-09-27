@@ -237,4 +237,5 @@ def test_spatial_kinematics_preview_metrics():
 
     assert metrics["joint"]["kind"] == "spherical"
     assert metrics["joint"]["name"] == "coincident-points"
+    assert metrics["tip"] == pytest.approx([0.0, 0.0, 0.5], abs=1e-12)
     assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)

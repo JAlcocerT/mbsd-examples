@@ -101,7 +101,8 @@ underconstrained, and rank-deficient configurations using residuals, Jacobian
 rank, rank-based DOF, and explicit classification fields.
 
 The local `v0.7.0-dev` branch adds an experimental 3D kinematics preview using
-point transforms and spherical-joint residuals.
+point transforms and spherical-joint residuals. It evaluates supplied poses and
+does not claim a general spatial position, velocity, or acceleration solver.
 
 ## Agent Samples
 
