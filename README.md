@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.5.0
-git -C mbsd-examples checkout v0.5.0
+git -C mbsd-core checkout v0.6.0
+git -C mbsd-examples checkout v0.6.0
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -95,9 +95,9 @@ artifacts/spatial/
 It demonstrates a geometry/export vocabulary only. It does not solve spatial
 constraints, kinematics, or dynamics, and the API may change before `1.0`.
 
-The local `v0.6.0-dev` branch adds a diagnostics-panel example that compares
-healthy, underconstrained, and rank-deficient configurations using residuals,
-Jacobian rank, rank-based DOF, and explicit classification fields.
+The `v0.6.0` release adds a diagnostics-panel example that compares healthy,
+underconstrained, and rank-deficient configurations using residuals, Jacobian
+rank, rank-based DOF, and explicit classification fields.
 
 ## Agent Samples
 

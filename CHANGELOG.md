@@ -1,13 +1,13 @@
 # Changelog
 
-## v0.6.0-dev - 2D Diagnostics Panel
+## v0.6.0 - Diagnostics and Validation
 
-Local development branch only.
+Week 6 companion release for MBSD Core `v0.6.0`.
 
 - Add a planar diagnostics-panel example around
   `PlanarMechanism.configuration_diagnostics()`.
-- Move the examples package version to `0.6.0.dev0` and depend on local
-  `mbsd>=0.6.0.dev0,<0.7`.
+- Move the examples package version to `0.6.0` and depend on
+  `mbsd>=0.6,<0.7`.
 - Keep the example focused on PWA-friendly status metrics rather than UI code.
 - Demonstrate healthy, underconstrained, and rank-deficient configurations.
 - Build paired core/examples distributions and smoke-test their wheels in CI.
