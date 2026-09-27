@@ -4,18 +4,28 @@ from __future__ import annotations
 
 import numpy as np
 
-from mbsd.spatial import Pose3D, SphericalJoint3D, max_spatial_residual, point_position
+from mbsd.spatial import (
+    Pose3D,
+    Quaternion,
+    SphericalJoint3D,
+    max_spatial_residual,
+    point_position,
+)
 
 
 def run_analysis() -> dict[str, object]:
     poses = [
-        Pose3D(translation=np.array([1.0, 0.0, 0.0])),
+        Pose3D(
+            translation=np.array([1.0, 0.0, 0.0]),
+            rotation=Quaternion.from_axis_angle((0.0, 0.0, 1.0), np.pi / 2.0),
+        ),
         Pose3D(translation=np.array([0.0, 1.0, 0.0])),
     ]
     joint = SphericalJoint3D(
+        name="coincident-points",
         body_i=0,
         body_j=1,
-        point_i=np.array([0.0, 1.0, 0.0]),
+        point_i=np.array([1.0, 0.0, 0.0]),
         point_j=np.array([1.0, 0.0, 0.0]),
     )
     residual = joint.residual(poses)

@@ -10,34 +10,42 @@ Local development branch only.
   `mbsd>=0.7.0.dev0,<0.8`.
 - Keep the example residual-based; no general 3D position solver is claimed yet.
 
-## v0.6.0-dev - 2D Diagnostics Panel
+## v0.6.0 - Diagnostics and Validation
 
-Local development branch only.
+Week 6 companion release for MBSD Core `v0.6.0`.
 
 - Add a planar diagnostics-panel example around
   `PlanarMechanism.configuration_diagnostics()`.
-- Move the examples package version to `0.6.0.dev0` and depend on local
-  `mbsd>=0.6.0.dev0,<0.7`.
+- Move the examples package version to `0.6.0` and depend on
+  `mbsd>=0.6,<0.7`.
 - Keep the example focused on PWA-friendly status metrics rather than UI code.
+- Demonstrate healthy, underconstrained, and rank-deficient configurations.
+- Build paired core/examples distributions and smoke-test their wheels in CI.
 
-## v0.5.0-dev - Experimental 3D Vocabulary
+## v0.5.0 - Experimental 3D Vocabulary
 
-Local development branch only.
+Week 5 companion release for MBSD Core `v0.5.0`.
 
-- Add a minimal spatial vocabulary example using `mbsd.spatial`.
-- Move the examples package version to `0.5.0.dev0` and depend on local
-  `mbsd>=0.5.0.dev0,<0.6`.
-- Keep the examples 3D scope to data modeling and pose/frame exports; no solved
-  3D mechanism behavior is claimed yet.
+- Add a pendulum-like spatial vocabulary example with a posed body, body-local
+  frame, and spherical world-pivot joint sketch.
+- Write and validate a versioned spatial-model JSON handoff artifact.
+- Move the examples package version to `0.5.0` and depend on
+  `mbsd>=0.5,<0.6`.
+- Keep the examples 3D scope to data modeling and pose/frame/joint exports; no
+  solved 3D mechanism behavior is claimed yet.
 
-## v0.4.0-dev - Export Handoff
+## v0.4.0 - Export Handoff
 
-Local development branch only.
+Week 4 companion release for MBSD Core `v0.4.0`.
 
 - Add a planar export-handoff example that writes mechanism JSON, result JSON,
-  and trajectory CSV artifacts.
-- Move the examples package version to `0.4.0.dev0` and depend on local
-  `mbsd>=0.4.0.dev0,<0.5`.
+  trajectory CSV, and named-point JSON/CSV artifacts.
+- Demonstrate explicit SI units, coordinate conventions, caller metadata, and
+  a portable spring-damper descriptor for PWA/CAD consumers.
+- Parse and validate every generated handoff artifact in tests.
+- Move the examples package version to `0.4.0` and depend on
+  `mbsd>=0.4,<0.5`.
+- Expose the installed package version through `mbsd_examples.__version__`.
 - Keep generated handoff artifacts under ignored `artifacts/` output.
 - Keep public browser/PWA code outside the OSS repositories.
 

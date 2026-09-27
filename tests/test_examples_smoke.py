@@ -1,3 +1,5 @@
+import csv
+import json
 import subprocess
 import sys
 from importlib.metadata import version
@@ -92,6 +94,7 @@ def test_export_handoff_example_runs():
     output = run_script("examples/planar_export_handoff.py")
     assert "Planar export handoff" in output
     assert "mechanism JSON" in output
+    assert "point trace JSON" in output
 
 
 def test_spatial_vocabulary_example_runs():
@@ -172,30 +175,66 @@ def test_export_handoff_artifacts_are_created(tmp_path):
     assert exports["mechanism_json"].exists()
     assert exports["result_json"].exists()
     assert exports["trajectory_csv"].exists()
-    assert '"schema": "mbsd.planar.mechanism"' in exports["mechanism_json"].read_text(
-        encoding="utf-8"
-    )
+    assert exports["point_json"].exists()
+    assert exports["point_csv"].exists()
+
+    mechanism = json.loads(exports["mechanism_json"].read_text(encoding="utf-8"))
+    result = json.loads(exports["result_json"].read_text(encoding="utf-8"))
+    point = json.loads(exports["point_json"].read_text(encoding="utf-8"))
+    with exports["trajectory_csv"].open(newline="", encoding="utf-8") as handle:
+        trajectory_rows = list(csv.reader(handle))
+    with exports["point_csv"].open(newline="", encoding="utf-8") as handle:
+        point_rows = list(csv.reader(handle))
+
+    assert mechanism["schema"] == "mbsd.planar.mechanism"
+    assert mechanism["schema_version"] == 1
+    assert mechanism["units"]["length"] == "m"
+    assert mechanism["metadata"]["consumer"] == ["pwa", "cad"]
+    assert mechanism["forces"]["springs"][0]["stiffness"] == 25.0
+    assert result["schema"] == "mbsd.planar.result"
+    assert result["diagnostics"]["max_constraint_residual"] < 1e-9
+    assert point["schema"] == "mbsd.planar.point_trace"
+    assert point["point"]["name"] == "slider_marker"
+    assert len(point["time"]) == 101
+    assert trajectory_rows[0][0] == "time_s"
+    assert len(trajectory_rows) == 102
+    assert point_rows[0][:3] == ["time_s", "x_m", "y_m"]
+    assert len(point_rows) == 102
 
 
-def test_spatial_vocabulary_metrics():
-    metrics = spatial_vocabulary.run_example()
+def test_spatial_vocabulary_metrics(tmp_path):
+    metrics = spatial_vocabulary.run_example(tmp_path)
 
     assert metrics["model"]["schema"] == "mbsd.spatial.model"
+    assert metrics["model"]["schema_version"] == 1
     assert metrics["model"]["status"] == "experimental"
+    assert metrics["model"]["conventions"]["world_frame"] == "right_handed_xyz"
+    assert metrics["model"]["bodies"][0]["pose"]["translation"] == [1.0, 2.0, 0.5]
+    assert metrics["model"]["frames"][0]["parent_body"] == 0
+    assert metrics["model"]["joints"][0]["kind"] == "spherical"
+    assert metrics["model"]["joints"][0]["body_i"] is None
     assert metrics["rotation_det"] == pytest.approx(1.0, abs=1e-12)
+    assert metrics["model_json"].exists()
+    exported = json.loads(metrics["model_json"].read_text(encoding="utf-8"))
+    assert exported == metrics["model"]
 
 
 def test_planar_diagnostics_panel_metrics():
     metrics = planar_diagnostics_panel.run_analysis()
 
-    assert metrics["constraint_norm"] < 1e-10
-    assert metrics["velocity_residual_norm"] < 1e-10
-    assert metrics["rank_degrees_of_freedom"] == 0
-    assert metrics["finite"]
+    assert metrics["healthy"]["constraint_norm"] < 1e-10
+    assert metrics["healthy"]["velocity_residual_norm"] < 1e-10
+    assert metrics["healthy"]["classification"] == "fully_constrained"
+    assert metrics["healthy"]["finite"]
+    assert metrics["underconstrained"]["classification"] == "underconstrained"
+    assert metrics["underconstrained"]["rank_degrees_of_freedom"] == 1
+    assert metrics["rank_deficient"]["classification"] == "rank_deficient"
+    assert metrics["rank_deficient"]["singular"]
 
 
 def test_spatial_kinematics_preview_metrics():
     metrics = spatial_kinematics_preview.run_analysis()
 
     assert metrics["joint"]["kind"] == "spherical"
+    assert metrics["joint"]["name"] == "coincident-points"
     assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)
