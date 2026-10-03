@@ -241,4 +241,6 @@ def test_spatial_kinematics_preview_metrics():
     assert metrics["tip"] == pytest.approx([0.0, 0.0, 0.5], abs=1e-12)
     assert metrics["tip_velocity"] == pytest.approx([0.0, -2.0, 0.0], abs=1e-12)
     assert metrics["fixed_residual"] == pytest.approx(np.zeros(6), abs=1e-12)
+    assert metrics["spherical_jacobian_shape"] == (3, 12)
+    assert metrics["spherical_jacobian_rank"] == 3
     assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)

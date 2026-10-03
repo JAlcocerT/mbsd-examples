@@ -11,6 +11,7 @@ from mbsd.spatial import (
     Quaternion,
     SphericalJoint3D,
     fixed_joint_descriptor_residual,
+    joint_residual_jacobian,
     max_spatial_residual,
     point_position,
     point_velocity,
@@ -55,12 +56,15 @@ def run_analysis() -> dict[str, object]:
         frame_j=tip_frame.pose,
     )
     fixed_residual = fixed_joint_descriptor_residual(fixed_joint, poses)
+    spherical_jacobian = joint_residual_jacobian(joint, poses)
     return {
         "joint": joint.as_dict(),
         "residual": residual,
         "tip": tip,
         "tip_velocity": tip_velocity,
         "fixed_residual": fixed_residual,
+        "spherical_jacobian_shape": spherical_jacobian.shape,
+        "spherical_jacobian_rank": int(np.linalg.matrix_rank(spherical_jacobian)),
         "max_residual": max_spatial_residual([residual, fixed_residual[:3], fixed_residual[3:]]),
     }
 
@@ -71,6 +75,7 @@ def print_report(metrics: dict[str, object]) -> None:
     print(f"  residual:             {np.array2string(metrics['residual'], precision=6)}")
     print(f"  tip:                  {np.array2string(metrics['tip'], precision=6)}")
     print(f"  tip velocity:         {np.array2string(metrics['tip_velocity'], precision=6)}")
+    print(f"  joint Jacobian rank:  {metrics['spherical_jacobian_rank']}")
     print(f"  max residual:         {metrics['max_residual']:.3e}")
 
 

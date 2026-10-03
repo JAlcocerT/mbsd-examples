@@ -10,6 +10,8 @@ Week 7 companion release for MBSD Core `v0.7.0`.
   and pin CI to the paired core `v0.7.0` tag.
 - Exercise the spatial-model v2 conventions used by downstream CAD/PWA
   readers while core retains validated legacy-v1 reading.
+- Report point velocity, fixed-joint residual, and spherical residual-Jacobian
+  metrics from the spatial kinematics preview.
 - Record paired tags, the supported core range, and consumed schemas in
   `release-compatibility.json`.
 - Keep the example residual-based; no general 3D position solver is claimed yet.
