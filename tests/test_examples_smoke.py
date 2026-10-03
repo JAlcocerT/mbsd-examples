@@ -5,6 +5,7 @@ import sys
 from importlib.metadata import version
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 import mbsd_examples
@@ -206,7 +207,7 @@ def test_spatial_vocabulary_metrics(tmp_path):
     metrics = spatial_vocabulary.run_example(tmp_path)
 
     assert metrics["model"]["schema"] == "mbsd.spatial.model"
-    assert metrics["model"]["schema_version"] == 1
+    assert metrics["model"]["schema_version"] == 2
     assert metrics["model"]["status"] == "experimental"
     assert metrics["model"]["conventions"]["world_frame"] == "right_handed_xyz"
     assert metrics["model"]["bodies"][0]["pose"]["translation"] == [1.0, 2.0, 0.5]
@@ -238,4 +239,6 @@ def test_spatial_kinematics_preview_metrics():
     assert metrics["joint"]["kind"] == "spherical"
     assert metrics["joint"]["name"] == "coincident-points"
     assert metrics["tip"] == pytest.approx([0.0, 0.0, 0.5], abs=1e-12)
+    assert metrics["tip_velocity"] == pytest.approx([0.0, -2.0, 0.0], abs=1e-12)
+    assert metrics["fixed_residual"] == pytest.approx(np.zeros(6), abs=1e-12)
     assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)

@@ -4,6 +4,9 @@ This is the practical companion roadmap for `mbsd-core` and `mbsd-examples`.
 Keep `mbsd-core` small and technical; use this repo and the website docs to
 explain the weekly release story.
 
+The framework-root `roadmap.md` is canonical. This file summarizes examples
+work and must be updated whenever that version ladder changes.
+
 ## v0.1.0
 
 Week 1 stays deliberately small:
@@ -83,9 +86,15 @@ forces a change:
 0.5.0: experimental 3D model vocabulary
 0.6.0: 2D solver hardening and API maturity
 0.7.0: 3D kinematics preview
-0.8.0: 3D dynamics preview
-0.9.0: integration and case-study track
-0.9.1+: additional curated examples, integrations, and case studies
+0.8.0: Mechanism.spatial() and constrained spatial kinematics
+0.9.0: fixed-orientation spatial translational dynamics preview
+0.9.1: free-body rotational dynamics foundation
+0.9.2: coupled six-DOF rigid-body dynamics
+0.9.3: constrained rotational dynamics and reactions
+0.9.4: interoperability and reference adapters
+0.9.5: agent-ready workflows
+0.9.6: 1.0 release candidate and compatibility freeze
+1.0.0: stable planar and coupled rotational 3D rigid-body framework
 ```
 
 ## v0.4.0
@@ -186,35 +195,37 @@ Examples target:
 
 ## v0.8.0
 
-Week 8 should introduce a limited 3D dynamics preview only if the kinematic track
-is stable enough.
+Week 8 should introduce the public spatial builder and constrained spatial
+kinematics, without claiming spatial dynamics.
 
 Core target:
 
-- spatial mass/inertia use in constrained acceleration solves
-- basic 3D time integration for very small systems
-- clear limitations around contact, collision, and complex joints
+- `Mechanism.spatial()` with stable body/frame handles
+- position and velocity constraint solves with rank diagnostics
+- spatial kinematic results, provenance, diagnostics, and JSON exports
+- clear limitations around dynamics, contact, collision, and complex joints
 
 Examples target:
 
-- one or two minimal 3D dynamics examples
-- conservative validation metrics and failure-mode notes
+- spherical, fixed-attachment, and deliberately singular examples
+- conservative residual metrics and failure-mode notes
 
 ## v0.9.x
 
-The `0.9.x` line should be the public integration and case-study track. Use it to
-show credible applications without bloating `mbsd-core`.
+The `0.9.x` line stages dynamics, interoperability, and stabilization. Detailed
+acceptance criteria live only in the canonical framework roadmap.
 
 Core target:
 
-- only small API additions discovered through examples and integrations
-- compatibility fixes, diagnostics, export refinements, and performance cleanups
+- fixed-orientation translation, then free and coupled rotational dynamics
+- constrained rotational dynamics with reaction loads
+- compatibility fixes, provenance, diagnostics, and export refinements
 - no notebook, media, website, or private-app code
 
 Examples target:
 
-- curated case studies
-- integration examples with CAD/render/data tools
+- independently validated dynamics cases and failure examples
+- integration examples with CAD/render/data tools from `0.9.4`
 - notebooks where they add durable explanation
 - selected historical GIFs and plots with source scripts, captions, and
   provenance

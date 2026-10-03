@@ -1,13 +1,17 @@
 # Changelog
 
-## v0.7.0-dev - 3D Kinematics Preview
+## v0.7.0 - Spatial Kinematics Preview
 
-Local development branch only.
+Week 7 companion release for MBSD Core `v0.7.0`.
 
 - Add an experimental spatial kinematics example using point transforms and
-  spherical-joint residuals.
-- Move the examples package version to `0.7.0.dev0` and depend on local
-  `mbsd>=0.7.0.dev0,<0.8`.
+  velocities, resolved frames, and spherical/fixed-joint residuals.
+- Move the examples package version to `0.7.0`, depend on `mbsd>=0.7,<0.8`,
+  and pin CI to the paired core `v0.7.0` tag.
+- Exercise the spatial-model v2 conventions used by downstream CAD/PWA
+  readers while core retains validated legacy-v1 reading.
+- Record paired tags, the supported core range, and consumed schemas in
+  `release-compatibility.json`.
 - Keep the example residual-based; no general 3D position solver is claimed yet.
 
 ## v0.6.0 - Diagnostics and Validation

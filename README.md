@@ -100,7 +100,7 @@ The `v0.6.0` release adds a diagnostics-panel example that compares healthy,
 underconstrained, and rank-deficient configurations using residuals, Jacobian
 rank, rank-based DOF, and explicit classification fields.
 
-The local `v0.7.0-dev` branch adds an experimental 3D kinematics preview using
+The `0.7.0` release adds an experimental 3D kinematics preview using
 point transforms and spherical-joint residuals. It evaluates supplied poses and
 does not claim a general spatial position, velocity, or acceleration solver.
 
