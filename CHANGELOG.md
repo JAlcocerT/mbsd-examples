@@ -4,6 +4,8 @@
 
 - Exercise the strict spatial kinematic-result reader against complete 0.8.1
   exports.
+- Report structural and excitation identities plus separate linear/angular
+  trajectory derivative errors in the spherical-pendulum example.
 - Keep the result schema at version 1 and the spatial API experimental.
 - Move the examples package to `0.8.1`, require `mbsd>=0.8.1,<0.9`, and pin CI
   to the paired core `v0.8.1` tag.

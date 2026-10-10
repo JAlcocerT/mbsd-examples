@@ -278,7 +278,10 @@ def test_spatial_spherical_pendulum_and_reader_metrics(tmp_path):
     assert metrics["final_x"] == pytest.approx(0.1, abs=1e-8)
     assert metrics["diagnostics"]["max_position_residual"] < 1e-8
     assert metrics["diagnostics"]["max_velocity_residual"] < 1e-8
+    assert metrics["diagnostics"]["max_trajectory_linear_velocity_error"] < 1e-5
+    assert metrics["diagnostics"]["max_trajectory_angular_velocity_error"] < 2e-5
     assert summary["model_id"] == metrics["model_id"]
+    assert summary["excitation_id"] == metrics["excitation_id"]
     assert summary["steps"] == 6
     assert summary["success"] is True
 

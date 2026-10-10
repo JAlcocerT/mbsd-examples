@@ -9,8 +9,15 @@ def read_summary(path: Path) -> dict[str, object]:
     payload = load_spatial_kinematic_result_payload(path)
     return {
         "model_id": payload["model_id"],
+        "excitation_id": payload.get("excitation_id"),
         "steps": len(payload["time"]),
         "bodies": [body["name"] for body in payload["bodies"]],
         "success": payload["solver_status"]["success"],
         "max_position_residual": payload["diagnostics"]["max_position_residual"],
+        "max_trajectory_linear_velocity_error": payload["diagnostics"].get(
+            "max_trajectory_linear_velocity_error"
+        ),
+        "max_trajectory_angular_velocity_error": payload["diagnostics"].get(
+            "max_trajectory_angular_velocity_error"
+        ),
     }

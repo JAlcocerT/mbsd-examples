@@ -27,6 +27,7 @@ def run_analysis(path: Path = ARTIFACT) -> dict[str, object]:
     return {
         "path": path,
         "model_id": result.model_id,
+        "excitation_id": result.excitation_id,
         "final_x": result.body_poses(link)[-1].translation[0],
         "diagnostics": diagnostics.as_dict(),
     }
@@ -39,6 +40,14 @@ def print_report(metrics: dict[str, object]) -> None:
     print(f"  final driven x:        {metrics['final_x']:.6f} m")
     print(f"  position residual:     {diagnostics['max_position_residual']:.3e}")
     print(f"  velocity residual:     {diagnostics['max_velocity_residual']:.3e}")
+    print(
+        "  trajectory linear FD: "
+        f"{diagnostics['max_trajectory_linear_velocity_error']:.3e} m/s"
+    )
+    print(
+        "  trajectory angular FD: "
+        f"{diagnostics['max_trajectory_angular_velocity_error']:.3e} rad/s"
+    )
 
 
 if __name__ == "__main__":
