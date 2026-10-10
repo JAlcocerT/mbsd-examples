@@ -14,9 +14,17 @@ examples from source. The lightweight `mbsd_examples` package marker exists only
 for repository metadata and local release checks; the wheel is not the user-facing
 distribution for the examples, gallery images, or scripts.
 
-For local development next to `mbsd-core`:
+Clone both repositories as siblings because examples resolves the paired core
+checkout directly:
 
-```sh
+```bash
+mkdir mbsd-framework
+cd mbsd-framework
+git clone https://github.com/JAlcocerT/mbsd-core.git
+git clone https://github.com/JAlcocerT/mbsd-examples.git
+git -C mbsd-core checkout v0.7.0
+git -C mbsd-examples checkout v0.7.0
+cd mbsd-examples
 uv sync --extra dev
 ```
 
@@ -36,7 +44,6 @@ uv run python examples/planar_export_handoff.py
 uv run python examples/spatial_vocabulary.py
 uv run python examples/planar_diagnostics_panel.py
 uv run python examples/spatial_kinematics_preview.py
-uv run python examples/spatial_dynamics_preview.py
 ```
 
 Generate the gallery:
@@ -66,27 +73,41 @@ examples/
 scripts/
 ```
 
-For `v0.3.0`, the gallery remains small and reproducible while adding a first
-2D synthesis preview: three-precision-point four-bar synthesis and rocker
-function fitting. Larger GIFs, historical media, CAD/render outputs, notebooks,
-larger synthesis batches, and 3D animations should arrive in later weekly
-releases.
-
-The local `v0.4.0-dev` branch adds a first export-handoff example that writes
-mechanism JSON, result JSON, and trajectory CSV artifacts under:
+Generated export artifacts are written under:
 
 ```text
 artifacts/export/
 ```
 
-The local `v0.5.0-dev` branch adds a minimal experimental spatial-vocabulary
-example for 3D poses, frames, and body metadata.
+Spatial model artifacts are written under:
 
-The local `v0.6.0-dev` branch adds a diagnostics-panel example that reports
-configuration residuals, velocity residuals, Jacobian rank, and rank-based DOF.
+```text
+artifacts/spatial/
+```
 
-The local `v0.7.0-dev` branch adds an experimental 3D kinematics preview using
-point transforms and spherical-joint residuals.
+Generated files remain ignored because their source examples reproduce them.
+
+## What The Examples Show
+
+| Example | Focus |
+| --- | --- |
+| `planar_driven_slider.py` | Prescribed planar motion and residual checks |
+| `planar_mass_spring.py` | Constrained forward dynamics with damping |
+| `planar_slider_crank_analysis.py` | Kinematic guardrails and finite-difference checks |
+| `planar_four_bar.py` | Closed-loop linkage kinematics |
+| `planar_scotch_yoke.py` | Slider tracking and stroke validation |
+| `planar_pendulum.py` | Driven angular motion |
+| `planar_energy_conservation.py` | Undamped energy-drift measurement |
+| `planar_precision_synthesis.py` | Three-position four-bar synthesis |
+| `planar_function_fit.py` | Rocker-function affine fitting |
+| `planar_export_handoff.py` | Versioned JSON/CSV engineering handoff |
+| `planar_diagnostics_panel.py` | Healthy, underconstrained, and singular diagnostics |
+| `spatial_vocabulary.py` | Posed bodies, frames, joints, and spatial-model JSON |
+| `spatial_kinematics_preview.py` | Point motion, frame resolution, joint residuals, and Jacobians |
+
+The spatial examples remain experimental. They evaluate supplied poses and do
+not claim a general spatial position, velocity, acceleration, or dynamics
+solver.
 
 The local `v0.8.0-dev` branch adds a limited experimental free-body dynamics
 preview for simple 3D state propagation.
@@ -105,5 +126,6 @@ validation metrics visible for human review.
 
 ## Relationship To MBSD Core
 
-`mbsd-core` is the installable framework. This repository is a companion
-collection of examples, plots, and case-study material.
+[MBSD Core](https://github.com/JAlcocerT/mbsd-core) is the installable framework.
+This repository is its companion collection of runnable examples, plots, and
+case-study material.

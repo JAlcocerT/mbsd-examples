@@ -1,57 +1,52 @@
 # Changelog
 
-## v0.8.0-dev - 3D Dynamics Preview
-
-Local development branch only.
-
-- Add a limited spatial free-body dynamics example.
-- Move the examples package version to `0.8.0.dev0` and depend on local
-  `mbsd>=0.8.0.dev0,<0.9`.
-- Keep the example unconstrained and explicit about not being full 3D multibody
-  dynamics yet.
-
-## v0.7.0-dev - 3D Kinematics Preview
-
-Local development branch only.
+## v0.7.0 - Spatial Kinematics Preview
 
 - Add an experimental spatial kinematics example using point transforms and
-  spherical-joint residuals.
-- Move the examples package version to `0.7.0.dev0` and depend on local
-  `mbsd>=0.7.0.dev0,<0.8`.
+  velocities, resolved frames, and spherical/fixed-joint residuals.
+- Move the examples package version to `0.7.0`, depend on `mbsd>=0.7,<0.8`,
+  and pin CI to the paired core `v0.7.0` tag.
+- Exercise the spatial-model v2 conventions used by downstream engineering
+  readers while core retains validated legacy-v1 reading.
+- Report point velocity, fixed-joint residual, and spherical residual-Jacobian
+  metrics from the spatial kinematics preview.
+- Record paired tags, the supported core range, and consumed schemas in
+  `release-compatibility.json`.
 - Keep the example residual-based; no general 3D position solver is claimed yet.
 
-## v0.6.0-dev - 2D Diagnostics Panel
-
-Local development branch only.
+## v0.6.0 - Diagnostics and Validation
 
 - Add a planar diagnostics-panel example around
   `PlanarMechanism.configuration_diagnostics()`.
-- Move the examples package version to `0.6.0.dev0` and depend on local
-  `mbsd>=0.6.0.dev0,<0.7`.
-- Keep the example focused on PWA-friendly status metrics rather than UI code.
+- Move the examples package version to `0.6.0` and depend on
+  `mbsd>=0.6,<0.7`.
+- Keep the example focused on portable status metrics rather than UI code.
+- Demonstrate healthy, underconstrained, and rank-deficient configurations.
+- Build paired core/examples distributions and smoke-test their wheels in CI.
 
-## v0.5.0-dev - Experimental 3D Vocabulary
+## v0.5.0 - Experimental 3D Vocabulary
 
-Local development branch only.
+- Add a pendulum-like spatial vocabulary example with a posed body, body-local
+  frame, and spherical world-pivot joint sketch.
+- Write and validate a versioned spatial-model JSON handoff artifact.
+- Move the examples package version to `0.5.0` and depend on
+  `mbsd>=0.5,<0.6`.
+- Keep the examples 3D scope to data modeling and pose/frame/joint exports; no
+  solved 3D mechanism behavior is claimed yet.
 
-- Add a minimal spatial vocabulary example using `mbsd.spatial`.
-- Move the examples package version to `0.5.0.dev0` and depend on local
-  `mbsd>=0.5.0.dev0,<0.6`.
-- Keep the examples 3D scope to data modeling and pose/frame exports; no solved
-  3D mechanism behavior is claimed yet.
-
-## v0.4.0-dev - Export Handoff
-
-Local development branch only.
+## v0.4.0 - Export Handoff
 
 - Add a planar export-handoff example that writes mechanism JSON, result JSON,
-  and trajectory CSV artifacts.
-- Move the examples package version to `0.4.0.dev0` and depend on local
-  `mbsd>=0.4.0.dev0,<0.5`.
+  trajectory CSV, and named-point JSON/CSV artifacts.
+- Demonstrate explicit SI units, coordinate conventions, caller metadata, and
+  a portable spring-damper descriptor for engineering-data consumers.
+- Parse and validate every generated handoff artifact in tests.
+- Move the examples package version to `0.4.0` and depend on
+  `mbsd>=0.4,<0.5`.
+- Expose the installed package version through `mbsd_examples.__version__`.
 - Keep generated handoff artifacts under ignored `artifacts/` output.
-- Keep public browser/PWA code outside the OSS repositories.
 
-## v0.3.0 - Week 3 Synthesis Preview
+## v0.3.0 - Synthesis Preview
 
 Prepared release candidate for MBSD Core `v0.3.0`.
 
@@ -67,14 +62,14 @@ Prepared release candidate for MBSD Core `v0.3.0`.
 - Keep synthesis scope narrow: no large optimization batches, notebooks, CAD,
   or 3D examples in this release.
 
-## v0.2.0 - Week 2 Examples
+## v0.2.0 - Expanded Examples
 
 Prepared release candidate for MBSD Core `v0.2.0`.
 
 - Add canonical four-bar linkage, scotch-yoke, driven-pendulum, and
   undamped mass-spring energy examples.
-- Refresh the gallery generator and PNG list for the Week 2 examples.
-- Use the new core validation helpers in the Week 2 examples.
+- Refresh the gallery generator and PNG list for the expanded examples.
+- Use the new core validation helpers in the expanded examples.
 - Make the examples repository buildable by adding a minimal
   `mbsd_examples` package marker.
 - Pin CI to the paired `mbsd-core` `v0.2.0` release tag for release
@@ -82,12 +77,12 @@ Prepared release candidate for MBSD Core `v0.2.0`.
 - Keep larger media, notebooks, synthesis batches, CAD/render handoffs, and 3D
   examples out of this release.
 
-## v0.1.0 - Week 1 Examples
+## v0.1.0 - Initial Examples
 
 Initial examples companion release for MBSD Core `v0.1.0`.
 
 - Add runnable driven-slider, mass-spring-damper, and slider-crank examples.
 - Add reproducible gallery-generation script.
-- Add small PNG gallery for the Week 1 release.
+- Add a small initial PNG gallery.
 - Keep historical media, GIFs, notebooks, CAD/render assets, synthesis batches,
   and 3D examples out of the first examples release.

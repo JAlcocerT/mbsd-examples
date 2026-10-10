@@ -531,7 +531,7 @@ wheels = [
 
 [[package]]
 name = "mbsd"
-version = "0.8.0.dev0"
+version = "0.7.0"
 source = { directory = "../mbsd-core" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -554,7 +554,7 @@ provides-extras = ["plot", "dev"]
 
 [[package]]
 name = "mbsd-examples"
-version = "0.8.0.dev0"
+version = "0.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "matplotlib", version = "3.10.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },

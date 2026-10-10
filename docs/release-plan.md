@@ -4,6 +4,9 @@ This is the practical companion roadmap for `mbsd-core` and `mbsd-examples`.
 Keep `mbsd-core` small and technical; use this repo and the website docs to
 explain the weekly release story.
 
+The framework-root `roadmap.md` is canonical. This file summarizes examples
+work and must be updated whenever that version ladder changes.
+
 ## v0.1.0
 
 Week 1 stays deliberately small:
@@ -83,9 +86,15 @@ forces a change:
 0.5.0: experimental 3D model vocabulary
 0.6.0: 2D solver hardening and API maturity
 0.7.0: 3D kinematics preview
-0.8.0: 3D dynamics preview
-0.9.0: integration and case-study track
-0.9.1+: additional curated examples, integrations, and case studies
+0.8.0: Mechanism.spatial() and constrained spatial kinematics
+0.9.0: fixed-orientation spatial translational dynamics preview
+0.9.1: free-body rotational dynamics foundation
+0.9.2: coupled six-DOF rigid-body dynamics
+0.9.3: constrained rotational dynamics and reactions
+0.9.4: interoperability and reference adapters
+0.9.5: agent-ready workflows
+0.9.6: 1.0 release candidate and compatibility freeze
+1.0.0: stable planar and coupled rotational 3D rigid-body framework
 ```
 
 ## v0.4.0
@@ -95,7 +104,8 @@ CAD package.
 
 Core target:
 
-- mechanism export schema for bodies, joints, drives, forces, metadata, and units
+- mechanism export schema for bodies, joints, drives, supported force
+  descriptors, metadata, and units
 - solved-result export schema for time histories, body poses, traces, and
   validation summaries
 - JSON-first helpers such as `to_dict()` / `to_json()` style APIs
@@ -110,9 +120,12 @@ Examples target:
   consume later
 - small generated artifacts committed only when they are reproducible from source
 
-Local `v0.4.0-dev` work has started with a planar export-handoff example that
-writes mechanism JSON, result JSON, and trajectory CSV artifacts for downstream
-apps and CAD/render bridges.
+The `v0.4.0` release provides versioned planar mechanism and result schemas,
+explicit SI units and coordinate conventions, portable spring-damper
+descriptors, caller metadata, wide trajectory CSV, and named body-point traces.
+The handoff example writes and validates each JSON/CSV artifact for downstream
+PWA and neutral CAD-path consumers. Arbitrary Python force callbacks remain
+outside the portable schema.
 
 ## v0.5.0
 
@@ -130,9 +143,13 @@ Core target:
 
 Examples target:
 
-- minimal 3D pose/frame examples
-- export-oriented 3D geometry examples when useful
+- a pendulum-like posed-body, body-local-frame, and spherical-joint sketch
+- a versioned JSON spatial-model artifact for geometry handoff
 - explicit notes that the 3D API can change before `1.0`
+
+The implemented vocabulary uses right-handed XYZ coordinates, active
+body-to-world quaternions ordered `[w, x, y, z]`, SI units, and principal body
+inertia values about the center of mass. It remains data-only in this release.
 
 ## v0.6.0
 
@@ -142,15 +159,21 @@ Core target:
 
 - cleaner internal constraint APIs
 - improved solver diagnostics and failure reports
-- offset center-of-mass dynamics support or a narrower documented boundary
+- consistent offset center-of-mass rejection at every unsupported dynamics API
+- genuine RK45 integration with caller initial velocities preserved
 - optional stabilization/projection controls for constrained dynamics
 - stronger energy, residual, and regression tests
+- hardened spatial value/export contracts before downstream solver work
+- distribution builds and installed-wheel smoke tests in CI
 
 Examples target:
 
 - examples that expose solver diagnostics
-- validation-heavy 2D mechanisms
-- comparison plots for residuals, energy, and solver behavior
+- healthy, underconstrained, and rank-deficient diagnostic states
+- comparison metrics for residuals, energy, and solver behavior
+
+This release is a readiness gate for later spatial solvers rather than a
+calendar-only milestone.
 
 ## v0.7.0
 
@@ -158,47 +181,51 @@ Week 7 should introduce a 3D kinematics preview.
 
 Core target:
 
-- basic spatial constraints and Jacobian structure
-- one or two solved 3D kinematic mechanisms
+- spatial point-position, pose-composition, and inverse-transform helpers
+- spherical-joint point-coincidence residual evaluation
+- compact maximum-residual summaries
 - explicit experimental namespace and warnings
+- no general 3D position, velocity, or acceleration solver claim
 - no broad contact, collision, or multiphysics claims
 
 Examples target:
 
-- simple spatial kinematics examples
-- validation metrics for 3D position-level and velocity-level constraints
+- a spatial transform and spherical-joint residual example
+- an analytic geometry assertion and numerical residual metric
 
 ## v0.8.0
 
-Week 8 should introduce a limited 3D dynamics preview only if the kinematic track
-is stable enough.
+Week 8 should introduce the public spatial builder and constrained spatial
+kinematics, without claiming spatial dynamics.
 
 Core target:
 
-- spatial mass/inertia use in constrained acceleration solves
-- basic 3D time integration for very small systems
-- clear limitations around contact, collision, and complex joints
+- `Mechanism.spatial()` with stable body/frame handles
+- position and velocity constraint solves with rank diagnostics
+- spatial kinematic results, provenance, diagnostics, and JSON exports
+- clear limitations around dynamics, contact, collision, and complex joints
 
 Examples target:
 
-- one or two minimal 3D dynamics examples
-- conservative validation metrics and failure-mode notes
+- spherical, fixed-attachment, and deliberately singular examples
+- conservative residual metrics and failure-mode notes
 
 ## v0.9.x
 
-The `0.9.x` line should be the public integration and case-study track. Use it to
-show credible applications without bloating `mbsd-core`.
+The `0.9.x` line stages dynamics, interoperability, and stabilization. Detailed
+acceptance criteria live only in the canonical framework roadmap.
 
 Core target:
 
-- only small API additions discovered through examples and integrations
-- compatibility fixes, diagnostics, export refinements, and performance cleanups
+- fixed-orientation translation, then free and coupled rotational dynamics
+- constrained rotational dynamics with reaction loads
+- compatibility fixes, provenance, diagnostics, and export refinements
 - no notebook, media, website, or private-app code
 
 Examples target:
 
-- curated case studies
-- integration examples with CAD/render/data tools
+- independently validated dynamics cases and failure examples
+- integration examples with CAD/render/data tools from `0.9.4`
 - notebooks where they add durable explanation
 - selected historical GIFs and plots with source scripts, captions, and
   provenance
