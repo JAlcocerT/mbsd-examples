@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.7.0
-git -C mbsd-examples checkout v0.7.0
+git -C mbsd-core checkout v0.8.0
+git -C mbsd-examples checkout v0.8.0
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -44,6 +44,10 @@ uv run python examples/planar_export_handoff.py
 uv run python examples/spatial_vocabulary.py
 uv run python examples/planar_diagnostics_panel.py
 uv run python examples/spatial_kinematics_preview.py
+uv run python examples/spatial_spherical_pendulum.py
+uv run python examples/spatial_two_body_joint.py
+uv run python examples/spatial_fixed_attachment.py
+uv run python examples/spatial_singular_diagnostics.py
 ```
 
 Generate the gallery:
@@ -104,13 +108,15 @@ Generated files remain ignored because their source examples reproduce them.
 | `planar_diagnostics_panel.py` | Healthy, underconstrained, and singular diagnostics |
 | `spatial_vocabulary.py` | Posed bodies, frames, joints, and spatial-model JSON |
 | `spatial_kinematics_preview.py` | Point motion, frame resolution, joint residuals, and Jacobians |
+| `spatial_spherical_pendulum.py` | Constrained pose sequence with position/velocity metrics and JSON |
+| `spatial_two_body_joint.py` | Two-body spherical-joint rank and degrees of freedom |
+| `spatial_fixed_attachment.py` | Fully constrained fixed-orientation attachment |
+| `spatial_singular_diagnostics.py` | Redundant constraints and actionable failure reporting |
+| `spatial_result_reader.py` | Minimal consumer for spatial kinematic-result JSON |
 
-The spatial examples remain experimental. They evaluate supplied poses and do
-not claim a general spatial position, velocity, acceleration, or dynamics
-solver.
-
-The local `v0.8.0-dev` branch adds a limited experimental free-body dynamics
-preview for simple 3D state propagation.
+The spatial examples remain experimental. The `0.8.0` builder solves small
+constrained position and velocity problems, but it does not expose spatial
+dynamics, rotational equations of motion, contact, or a broad joint catalog.
 
 ## Agent Samples
 

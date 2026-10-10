@@ -24,6 +24,11 @@ from examples import planar_scotch_yoke
 from examples import planar_slider_crank_analysis
 from examples import spatial_vocabulary
 from examples import spatial_kinematics_preview
+from examples import spatial_fixed_attachment
+from examples import spatial_result_reader
+from examples import spatial_singular_diagnostics
+from examples import spatial_spherical_pendulum
+from examples import spatial_two_body_joint
 
 
 def run_script(path: str) -> str:
@@ -114,6 +119,19 @@ def test_spatial_kinematics_preview_example_runs():
     output = run_script("examples/spatial_kinematics_preview.py")
     assert "Spatial kinematics preview" in output
     assert "max residual" in output
+
+
+@pytest.mark.parametrize(
+    ("script", "heading"),
+    [
+        ("spatial_spherical_pendulum.py", "Spatial spherical pendulum"),
+        ("spatial_two_body_joint.py", "Spatial two-body spherical joint"),
+        ("spatial_fixed_attachment.py", "Spatial fixed attachment"),
+        ("spatial_singular_diagnostics.py", "Spatial singular diagnostics"),
+    ],
+)
+def test_spatial_mechanism_examples_run(script, heading):
+    assert heading in run_script(f"examples/{script}")
 
 
 def test_gallery_script_runs():
@@ -245,3 +263,28 @@ def test_spatial_kinematics_preview_metrics():
     assert metrics["spherical_jacobian_rank"] == 3
     assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)
 
+
+def test_spatial_spherical_pendulum_and_reader_metrics(tmp_path):
+    path = tmp_path / "result.json"
+    metrics = spatial_spherical_pendulum.run_analysis(path)
+    summary = spatial_result_reader.read_summary(path)
+
+    assert metrics["final_x"] == pytest.approx(0.1, abs=1e-8)
+    assert metrics["diagnostics"]["max_position_residual"] < 1e-8
+    assert metrics["diagnostics"]["max_velocity_residual"] < 1e-8
+    assert summary["model_id"] == metrics["model_id"]
+    assert summary["steps"] == 6
+    assert summary["success"] is True
+
+
+def test_spatial_two_body_fixed_and_singular_metrics():
+    two_body = spatial_two_body_joint.run_analysis()
+    fixed = spatial_fixed_attachment.run_analysis()
+    singular = spatial_singular_diagnostics.run_analysis()
+
+    assert two_body["degrees_of_freedom"] == 3
+    assert two_body["classification"] == "underconstrained"
+    assert fixed["model"]["classification"] == "fully_constrained"
+    assert fixed["result"]["max_position_residual"] < 1e-9
+    assert singular["diagnostics"]["classification"] == "rank_deficient"
+    assert "Spatial position solve failed" in singular["failure"]

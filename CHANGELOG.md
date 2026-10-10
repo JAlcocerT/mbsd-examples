@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.8.0 - Constrained Spatial Kinematics
+
+- Add a driven spherical pendulum-like pose sequence with published position
+  and velocity residual metrics.
+- Add two-body spherical-joint and fixed-attachment examples with hand-checked
+  rank and degree-of-freedom expectations.
+- Add a deliberately redundant model and an inconsistent model with actionable
+  diagnostic output.
+- Add a minimal public reader for the versioned spatial kinematic-result JSON.
+- Move the examples package to `0.8.0`, depend on `mbsd>=0.8,<0.9`, and pin CI
+  to the paired core `v0.8.0` tag.
+
 ## v0.7.0 - Spatial Kinematics Preview
 
 - Add an experimental spatial kinematics example using point transforms and

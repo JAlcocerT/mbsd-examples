@@ -124,7 +124,7 @@ The `v0.4.0` release provides versioned planar mechanism and result schemas,
 explicit SI units and coordinate conventions, portable spring-damper
 descriptors, caller metadata, wide trajectory CSV, and named body-point traces.
 The handoff example writes and validates each JSON/CSV artifact for downstream
-PWA and neutral CAD-path consumers. Arbitrary Python force callbacks remain
+browser and neutral CAD-path consumers. Arbitrary Python force callbacks remain
 outside the portable schema.
 
 ## v0.5.0
@@ -195,8 +195,8 @@ Examples target:
 
 ## v0.8.0
 
-Week 8 should introduce the public spatial builder and constrained spatial
-kinematics, without claiming spatial dynamics.
+This release introduces the public spatial builder and constrained spatial
+kinematics without claiming spatial dynamics.
 
 Core target:
 
@@ -231,9 +231,9 @@ Examples target:
   provenance
 - larger synthesis batches when they are reproducible
 
-Public browser/PWA work is intentionally not part of the OSS roadmap. A private
-PWA can build on top of `mbsd-core` and consume the same export/result schemas
-without becoming part of the public repos.
+Browser application code is intentionally not part of the OSS roadmap. External
+applications can consume the same public export and result schemas without
+becoming part of these repositories.
 
 ## Later Batches
 

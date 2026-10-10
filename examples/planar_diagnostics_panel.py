@@ -1,4 +1,4 @@
-"""PWA-friendly diagnostics payloads for healthy and problematic models."""
+"""Portable diagnostics payloads for healthy and problematic models."""
 
 from __future__ import annotations
 

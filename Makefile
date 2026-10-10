@@ -28,6 +28,10 @@ examples:
 	$(UV) run python examples/spatial_vocabulary.py
 	$(UV) run python examples/planar_diagnostics_panel.py
 	$(UV) run python examples/spatial_kinematics_preview.py
+	$(UV) run python examples/spatial_spherical_pendulum.py
+	$(UV) run python examples/spatial_two_body_joint.py
+	$(UV) run python examples/spatial_fixed_attachment.py
+	$(UV) run python examples/spatial_singular_diagnostics.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py
