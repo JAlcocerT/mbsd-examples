@@ -12,10 +12,10 @@ from mbsd.spatial import (
     SphericalJoint3D,
     fixed_joint_descriptor_residual,
     joint_residual_jacobian,
-    max_spatial_residual,
     point_position,
     point_velocity,
     resolve_frame_pose,
+    spatial_residual_summary,
 )
 
 
@@ -56,6 +56,7 @@ def run_analysis() -> dict[str, object]:
         frame_j=tip_frame.pose,
     )
     fixed_residual = fixed_joint_descriptor_residual(fixed_joint, poses)
+    residual_summary = spatial_residual_summary([residual, fixed_residual])
     spherical_jacobian = joint_residual_jacobian(joint, poses)
     return {
         "joint": joint.as_dict(),
@@ -65,7 +66,7 @@ def run_analysis() -> dict[str, object]:
         "fixed_residual": fixed_residual,
         "spherical_jacobian_shape": spherical_jacobian.shape,
         "spherical_jacobian_rank": int(np.linalg.matrix_rank(spherical_jacobian)),
-        "max_residual": max_spatial_residual([residual, fixed_residual[:3], fixed_residual[3:]]),
+        "residual_summary": residual_summary.as_dict(),
     }
 
 
@@ -76,7 +77,9 @@ def print_report(metrics: dict[str, object]) -> None:
     print(f"  tip:                  {np.array2string(metrics['tip'], precision=6)}")
     print(f"  tip velocity:         {np.array2string(metrics['tip_velocity'], precision=6)}")
     print(f"  joint Jacobian rank:  {metrics['spherical_jacobian_rank']}")
-    print(f"  max residual:         {metrics['max_residual']:.3e}")
+    summary = metrics["residual_summary"]
+    print(f"  max translation:      {summary['max_translation_residual_m']:.3e} m")
+    print(f"  max rotation:         {summary['max_rotation_residual_rad']:.3e} rad")
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@
 - Add a deliberately redundant model and an inconsistent model with actionable
   diagnostic output.
 - Add a minimal public reader for the versioned spatial kinematic-result JSON.
+- Report translation and rotation residuals separately with explicit SI units.
 - Move the examples package to `0.8.0`, depend on `mbsd>=0.8,<0.9`, and pin CI
   to the paired core `v0.8.0` tag.
 

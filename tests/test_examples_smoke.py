@@ -118,7 +118,8 @@ def test_planar_diagnostics_panel_example_runs():
 def test_spatial_kinematics_preview_example_runs():
     output = run_script("examples/spatial_kinematics_preview.py")
     assert "Spatial kinematics preview" in output
-    assert "max residual" in output
+    assert "max translation" in output
+    assert "max rotation" in output
 
 
 @pytest.mark.parametrize(
@@ -261,7 +262,12 @@ def test_spatial_kinematics_preview_metrics():
     assert metrics["fixed_residual"] == pytest.approx(np.zeros(6), abs=1e-12)
     assert metrics["spherical_jacobian_shape"] == (3, 12)
     assert metrics["spherical_jacobian_rank"] == 3
-    assert metrics["max_residual"] == pytest.approx(0.0, abs=1e-12)
+    assert metrics["residual_summary"]["max_translation_residual_m"] == pytest.approx(
+        0.0, abs=1e-12
+    )
+    assert metrics["residual_summary"]["max_rotation_residual_rad"] == pytest.approx(
+        0.0, abs=1e-12
+    )
 
 
 def test_spatial_spherical_pendulum_and_reader_metrics(tmp_path):
