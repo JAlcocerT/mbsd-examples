@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.8.0
-git -C mbsd-examples checkout v0.8.0
+git -C mbsd-core checkout v0.8.1
+git -C mbsd-examples checkout v0.8.1
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -117,6 +117,8 @@ Generated files remain ignored because their source examples reproduce them.
 The spatial examples remain experimental. The `0.8.0` builder solves small
 constrained position and velocity problems, but it does not expose spatial
 dynamics, rotational equations of motion, contact, or a broad joint catalog.
+Version `0.8.1` keeps that capability boundary and demonstrates stricter result
+validation for downstream JSON consumers.
 
 ## Agent Samples
 

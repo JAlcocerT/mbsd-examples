@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.8.1 - Spatial Kinematics Hardening
+
+- Exercise the strict spatial kinematic-result reader against complete 0.8.1
+  exports.
+- Keep the result schema at version 1 and the spatial API experimental.
+- Move the examples package to `0.8.1`, require `mbsd>=0.8.1,<0.9`, and pin CI
+  to the paired core `v0.8.1` tag.
+- Keep spatial dynamics examples outside this release and targeted at `0.9.0`.
+
 ## v0.8.0 - Constrained Spatial Kinematics
 
 - Add a driven spherical pendulum-like pose sequence with published position

@@ -1,8 +1,8 @@
 {
-  "release": "0.8.0",
-  "core_ref": "v0.8.0",
-  "examples_ref": "v0.8.0",
-  "core_range": ">=0.8,<0.9",
+  "release": "0.8.1",
+  "core_ref": "v0.8.1",
+  "examples_ref": "v0.8.1",
+  "core_range": ">=0.8.1,<0.9",
   "consumed_schemas": {
     "mbsd.planar.mechanism": [1],
     "mbsd.planar.result": [1],

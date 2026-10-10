@@ -210,6 +210,23 @@ Examples target:
 - spherical, fixed-attachment, and deliberately singular examples
 - conservative residual metrics and failure-mode notes
 
+## v0.8.1
+
+This patch release hardens the constrained-spatial-kinematics interchange
+contract without adding dynamics or changing schema versions.
+
+Core target:
+
+- validate complete pose, quaternion, diagnostics, units, conventions, and
+  capability records in spatial kinematic-result payloads
+- reject non-finite JSON values during validation and export
+- preserve valid `0.8.0` result compatibility
+
+Examples target:
+
+- exercise the strict public reader using a complete paired result artifact
+- keep the dynamics boundary explicit until `0.9.0`
+
 ## v0.9.x
 
 The `0.9.x` line stages dynamics, interoperability, and stabilization. Detailed
