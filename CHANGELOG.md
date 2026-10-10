@@ -6,6 +6,8 @@
   exports.
 - Report structural and excitation identities plus separate linear/angular
   trajectory derivative errors in the spherical-pendulum example.
+- Label that example as an underdetermined prescribed kinematic path with two
+  remaining degrees of freedom, not a physical pendulum simulation.
 - Keep the result schema at version 1 and the spatial API experimental.
 - Move the examples package to `0.8.1`, require `mbsd>=0.8.1,<0.9`, and pin CI
   to the paired core `v0.8.1` tag.

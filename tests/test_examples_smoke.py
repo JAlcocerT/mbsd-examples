@@ -125,7 +125,7 @@ def test_spatial_kinematics_preview_example_runs():
 @pytest.mark.parametrize(
     ("script", "heading"),
     [
-        ("spatial_spherical_pendulum.py", "Spatial spherical pendulum"),
+        ("spatial_spherical_pendulum.py", "Spatial spherical-joint kinematic path"),
         ("spatial_two_body_joint.py", "Spatial two-body spherical joint"),
         ("spatial_fixed_attachment.py", "Spatial fixed attachment"),
         ("spatial_singular_diagnostics.py", "Spatial singular diagnostics"),
@@ -276,8 +276,12 @@ def test_spatial_spherical_pendulum_and_reader_metrics(tmp_path):
     summary = spatial_result_reader.read_summary(path)
 
     assert metrics["final_x"] == pytest.approx(0.1, abs=1e-8)
+    assert metrics["classification"] == "underconstrained"
+    assert metrics["degrees_of_freedom"] == 2
     assert metrics["diagnostics"]["max_position_residual"] < 1e-8
     assert metrics["diagnostics"]["max_velocity_residual"] < 1e-8
+    assert metrics["diagnostics"]["max_translation_residual_m"] < 1e-8
+    assert metrics["diagnostics"]["max_rotation_residual_rad"] < 1e-8
     assert metrics["diagnostics"]["max_trajectory_linear_velocity_error"] < 1e-5
     assert metrics["diagnostics"]["max_trajectory_angular_velocity_error"] < 2e-5
     assert summary["model_id"] == metrics["model_id"]

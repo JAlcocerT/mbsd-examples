@@ -108,7 +108,7 @@ Generated files remain ignored because their source examples reproduce them.
 | `planar_diagnostics_panel.py` | Healthy, underconstrained, and singular diagnostics |
 | `spatial_vocabulary.py` | Posed bodies, frames, joints, and spatial-model JSON |
 | `spatial_kinematics_preview.py` | Point motion, frame resolution, joint residuals, and Jacobians |
-| `spatial_spherical_pendulum.py` | Constrained pose sequence with position/velocity metrics and JSON |
+| `spatial_spherical_pendulum.py` | Prescribed underdetermined spherical-joint path with kinematic metrics and JSON; not a dynamics simulation |
 | `spatial_two_body_joint.py` | Two-body spherical-joint rank and degrees of freedom |
 | `spatial_fixed_attachment.py` | Fully constrained fixed-orientation attachment |
 | `spatial_singular_diagnostics.py` | Redundant constraints and actionable failure reporting |
