@@ -87,13 +87,14 @@ forces a change:
 0.6.0: 2D solver hardening and API maturity
 0.7.0: 3D kinematics preview
 0.8.0: Mechanism.spatial() and constrained spatial kinematics
-0.9.0: fixed-orientation spatial translational dynamics preview
-0.9.1: free-body rotational dynamics foundation
-0.9.2: coupled six-DOF rigid-body dynamics
-0.9.3: constrained rotational dynamics and reactions
-0.9.4: interoperability and reference adapters
-0.9.5: agent-ready workflows
-0.9.6: 1.0 release candidate and compatibility freeze
+0.9.0: empty release (tag accidentally matched 0.8.1)
+0.9.1: fixed-orientation spatial translational dynamics preview
+0.9.2: free-body rotational dynamics foundation
+0.9.3: coupled six-DOF rigid-body dynamics
+0.9.4: constrained rotational dynamics and reactions
+0.9.5: interoperability and reference adapters
+0.9.6: agent-ready workflows
+0.9.7: 1.0 release candidate and compatibility freeze
 1.0.0: stable planar and coupled rotational 3D rigid-body framework
 ```
 
@@ -227,22 +228,26 @@ Examples target:
 - exercise the strict public reader using a complete paired result artifact
 - keep the dynamics boundary explicit until `0.9.0`
 
-## v0.9.x
+## v0.9.1
 
-The `0.9.x` line stages dynamics, interoperability, and stabilization. Detailed
-acceptance criteria live only in the canonical framework roadmap.
+The first functional `0.9.x` release is the fixed-orientation translational
+dynamics preview. It keeps orientations constant and exposes no torque input.
+The published `v0.9.0` tag accidentally matched `v0.8.1`; `v0.9.1` preserves
+that public history while delivering the intended implementation.
 
 Core target:
 
-- fixed-orientation translation, then free and coupled rotational dynamics
-- constrained rotational dynamics with reaction loads
-- compatibility fixes, provenance, diagnostics, and export refinements
-- no notebook, media, website, or private-app code
+- fixed-orientation translation with force inputs and translation constraints
+- acceleration-level drive laws, multipliers, physical reaction loads, and
+  three-level residuals
+- bounded integration settings and versioned dynamic-result JSON
+- explicit rejection of rotational dynamics, torque, and offset-force claims
 
 Examples target:
 
-- independently validated dynamics cases and failure examples
-- integration examples with CAD/render/data tools from `0.9.4`
+- analytic constant-force and constrained-drive validation cases
+- diagnostics-rich JSON artifacts and explicit limitation reporting
+- integration examples with CAD/render/data tools from `0.9.5`
 - notebooks where they add durable explanation
 - selected historical GIFs and plots with source scripts, captions, and
   provenance

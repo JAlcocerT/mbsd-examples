@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.9.1 - Fixed-Orientation Spatial Translational Dynamics
+
+- Add an analytic constant-force translation example with dynamic-result JSON.
+- Add an acceleration-driven constrained translation example exposing the
+  drive reaction and all three constraint-residual levels.
+- Print the unsupported rotation and torque boundary alongside preview results.
+- Move the examples package to `0.9.1`, require `mbsd>=0.9.1,<0.10`, and pin CI
+  to the paired core `v0.9.1` tag.
+
+## v0.9.0 - Empty Release Correction
+
+- The published `v0.9.0` tag accidentally referenced the same source commit as
+  `v0.8.1`; it did not contain the new dynamics examples announced in its
+  GitHub release.
+- Version `v0.9.1` is the first release containing those examples. The
+  `v0.9.0` tag remains unchanged to preserve public release history.
+
 ## v0.8.1 - Spatial Kinematics Hardening
 
 - Exercise the strict spatial kinematic-result reader against complete 0.8.1

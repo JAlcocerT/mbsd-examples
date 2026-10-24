@@ -29,6 +29,8 @@ from examples import spatial_result_reader
 from examples import spatial_singular_diagnostics
 from examples import spatial_spherical_pendulum
 from examples import spatial_two_body_joint
+from examples import spatial_force_driven_translation
+from examples import spatial_constrained_translation
 
 
 def run_script(path: str) -> str:
@@ -132,6 +134,29 @@ def test_spatial_kinematics_preview_example_runs():
     ],
 )
 def test_spatial_mechanism_examples_run(script, heading):
+    assert heading in run_script(f"examples/{script}")
+
+
+def test_fixed_orientation_dynamics_examples_run():
+    force = spatial_force_driven_translation.run_analysis()
+    constrained = spatial_constrained_translation.run_analysis()
+
+    assert force["max_position_error"] < 1e-8
+    assert force["max_velocity_error"] < 1e-8
+    assert force["diagnostics"]["max_force_balance_residual_n"] < 1e-10
+    assert constrained["final_x"] == pytest.approx(1.0, abs=1e-9)
+    assert constrained["final_velocity"] == pytest.approx(2.0, abs=1e-9)
+    assert constrained["drive_reaction"] == pytest.approx(4.0, abs=1e-9)
+
+
+@pytest.mark.parametrize(
+    ("script", "heading"),
+    [
+        ("spatial_force_driven_translation.py", "Fixed-orientation force-driven translation"),
+        ("spatial_constrained_translation.py", "Fixed-orientation constrained translation"),
+    ],
+)
+def test_fixed_orientation_dynamics_scripts_run(script, heading):
     assert heading in run_script(f"examples/{script}")
 
 

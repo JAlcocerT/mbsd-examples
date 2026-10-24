@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.8.1
-git -C mbsd-examples checkout v0.8.1
+git -C mbsd-core checkout v0.9.1
+git -C mbsd-examples checkout v0.9.1
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -48,6 +48,8 @@ uv run python examples/spatial_spherical_pendulum.py
 uv run python examples/spatial_two_body_joint.py
 uv run python examples/spatial_fixed_attachment.py
 uv run python examples/spatial_singular_diagnostics.py
+uv run python examples/spatial_force_driven_translation.py
+uv run python examples/spatial_constrained_translation.py
 ```
 
 Generate the gallery:
@@ -113,12 +115,15 @@ Generated files remain ignored because their source examples reproduce them.
 | `spatial_fixed_attachment.py` | Fully constrained fixed-orientation attachment |
 | `spatial_singular_diagnostics.py` | Redundant constraints and actionable failure reporting |
 | `spatial_result_reader.py` | Minimal consumer for spatial kinematic-result JSON |
+| `spatial_force_driven_translation.py` | Constant-force case checked against its analytic trajectory and exported to JSON |
+| `spatial_constrained_translation.py` | Acceleration-driven translation with constraint reactions and three-level residuals |
 
-The spatial examples remain experimental. The `0.8.0` builder solves small
-constrained position and velocity problems, but it does not expose spatial
-dynamics, rotational equations of motion, contact, or a broad joint catalog.
-Version `0.8.1` keeps that capability boundary and demonstrates stricter result
-validation for downstream JSON consumers.
+The spatial examples remain experimental. Version `0.9.1` adds only
+fixed-orientation translational dynamics: world-frame forces at coincident body
+reference points/centers of mass, translation constraints, multipliers,
+physical reactions, diagnostics, and JSON export. It does not integrate
+orientation, accept torque, provide spatial inertia dynamics, contact, or a
+broad joint catalog.
 
 ## Agent Samples
 
@@ -137,3 +142,9 @@ validation metrics visible for human review.
 [MBSD Core](https://github.com/JAlcocerT/mbsd-core) is the installable framework.
 This repository is its companion collection of runnable examples, plots, and
 case-study material.
+
+The paired `0.9.1` release demonstrates fixed-orientation translational
+dynamics only. The examples expose world-frame center-of-mass forces,
+constraint reactions, three-level residuals, and JSON handoffs while clearly
+excluding quaternion integration, torque response, contact, and coupled
+rotational dynamics.

@@ -32,6 +32,8 @@ examples:
 	$(UV) run python examples/spatial_two_body_joint.py
 	$(UV) run python examples/spatial_fixed_attachment.py
 	$(UV) run python examples/spatial_singular_diagnostics.py
+	$(UV) run python examples/spatial_force_driven_translation.py
+	$(UV) run python examples/spatial_constrained_translation.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py
