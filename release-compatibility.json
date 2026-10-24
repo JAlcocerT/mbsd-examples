@@ -1,14 +1,15 @@
 {
-  "release": "0.9.1",
-  "core_ref": "v0.9.1",
-  "examples_ref": "v0.9.1",
-  "core_range": ">=0.9.1,<0.10",
+  "release": "0.9.2",
+  "core_ref": "v0.9.2",
+  "examples_ref": "v0.9.2",
+  "core_range": ">=0.9.2,<0.10",
   "consumed_schemas": {
     "mbsd.planar.mechanism": [1],
     "mbsd.planar.result": [1],
     "mbsd.planar.point_trace": [1],
     "mbsd.spatial.model": [2],
     "mbsd.spatial.kinematic_result": [1],
-    "mbsd.spatial.fixed_orientation_dynamic_result": [1]
+    "mbsd.spatial.fixed_orientation_dynamic_result": [2],
+    "mbsd.spatial.free_rigid_body_dynamic_result": [1]
   }
 }

@@ -257,6 +257,46 @@ Browser application code is intentionally not part of the OSS roadmap. External
 applications can consume the same public export and result schemas without
 becoming part of these repositories.
 
+## v0.9.2
+
+Free-body rotational dynamics is limited to one unconstrained rigid body. The
+solver uses active body-to-world quaternions, body-frame angular velocity and
+inertia, Euler's gyroscopic term, and explicit world/body load frames.
+
+Core acceptance thresholds:
+
+- principal-axis constant-torque angular velocity and orientation error below
+  `2e-9`;
+- torque-free asymmetric-body relative energy error below `2e-10`;
+- torque-free inertial angular-momentum error below `2e-10`;
+- quaternion norm and rotation orthogonality error below `1e-12`;
+- tightened integration tolerances reduce error against a high-accuracy
+  reference trajectory;
+- invalid inertia tensors, non-finite runtime loads, constraints, ground, and
+  multiple bodies fail before a result is returned.
+
+Fixed-orientation hardening carried into this release:
+
+- the independent `a=sin(t)`, `v=1-cos(t)`, `x=t-sin(t)` reference case must
+  match position and velocity within `1e-9`;
+- tightened translational integration tolerances must reduce trajectory error,
+  with the tight velocity error below `1e-8`;
+- force balance and unconstrained energy/momentum checks retain their existing
+  `1e-12` to `1e-13` thresholds;
+- inconsistent position/velocity states, redundant constraints, and non-finite
+  runtime forces must fail explicitly;
+- schema rows must carry validated names, kinds, components, body references,
+  residual units, and multiplier units.
+
+Examples target:
+
+- constant principal-axis torque with an analytic orientation check;
+- torque-free asymmetric rotation with conservation metrics;
+- versioned JSON output with explicit orientation, angular-velocity, inertia,
+  force, and torque conventions;
+- an explicit statement that coupled and constrained rotation remain future
+  milestones.
+
 ## Later Batches
 
 Good candidates for future weekly releases:

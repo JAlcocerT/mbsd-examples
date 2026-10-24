@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.9.2 - Free-Body Rotational Dynamics
+
+- Add a constant-principal-torque example checked against its analytic angular
+  velocity and orientation.
+- Add a torque-free asymmetric-top example that checks rotational energy and
+  inertial angular-momentum conservation.
+- Export a free-rigid-body JSON result while printing the unsupported
+  multi-body constraint boundary.
+- Move the examples package to `0.9.2`, require `mbsd>=0.9.2,<0.10`, and pin CI
+  to the paired core `v0.9.2` tag.
+
 ## v0.9.1 - Fixed-Orientation Spatial Translational Dynamics
 
 - Add an analytic constant-force translation example with dynamic-result JSON.

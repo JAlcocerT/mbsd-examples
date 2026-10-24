@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.9.1
-git -C mbsd-examples checkout v0.9.1
+git -C mbsd-core checkout v0.9.2
+git -C mbsd-examples checkout v0.9.2
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -50,6 +50,8 @@ uv run python examples/spatial_fixed_attachment.py
 uv run python examples/spatial_singular_diagnostics.py
 uv run python examples/spatial_force_driven_translation.py
 uv run python examples/spatial_constrained_translation.py
+uv run python examples/spatial_free_body_rotation.py
+uv run python examples/spatial_asymmetric_top.py
 ```
 
 Generate the gallery:
@@ -117,6 +119,8 @@ Generated files remain ignored because their source examples reproduce them.
 | `spatial_result_reader.py` | Minimal consumer for spatial kinematic-result JSON |
 | `spatial_force_driven_translation.py` | Constant-force case checked against its analytic trajectory and exported to JSON |
 | `spatial_constrained_translation.py` | Acceleration-driven translation with constraint reactions and three-level residuals |
+| `spatial_free_body_rotation.py` | Constant principal-axis torque checked against analytic rotation |
+| `spatial_asymmetric_top.py` | Torque-free asymmetric body with energy and angular-momentum checks |
 
 The spatial examples remain experimental. Version `0.9.1` adds only
 fixed-orientation translational dynamics: world-frame forces at coincident body
@@ -148,3 +152,8 @@ dynamics only. The examples expose world-frame center-of-mass forces,
 constraint reactions, three-level residuals, and JSON handoffs while clearly
 excluding quaternion integration, torque response, contact, and coupled
 rotational dynamics.
+
+The paired `0.9.2` release adds quaternion integration and torque response for
+one unconstrained rigid body. It demonstrates principal-axis constant torque
+and asymmetric torque-free motion. Multi-body coupling, joints, contact, and
+constrained rotational reactions remain outside this solver.

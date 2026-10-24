@@ -34,6 +34,8 @@ examples:
 	$(UV) run python examples/spatial_singular_diagnostics.py
 	$(UV) run python examples/spatial_force_driven_translation.py
 	$(UV) run python examples/spatial_constrained_translation.py
+	$(UV) run python examples/spatial_free_body_rotation.py
+	$(UV) run python examples/spatial_asymmetric_top.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

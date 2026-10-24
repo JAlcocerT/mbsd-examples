@@ -31,6 +31,8 @@ from examples import spatial_spherical_pendulum
 from examples import spatial_two_body_joint
 from examples import spatial_force_driven_translation
 from examples import spatial_constrained_translation
+from examples import spatial_free_body_rotation
+from examples import spatial_asymmetric_top
 
 
 def run_script(path: str) -> str:
@@ -326,3 +328,13 @@ def test_spatial_two_body_fixed_and_singular_metrics():
     assert fixed["result"]["max_position_residual"] < 1e-9
     assert singular["diagnostics"]["classification"] == "rank_deficient"
     assert "Spatial position solve failed" in singular["failure"]
+
+
+def test_free_body_rotation_examples(tmp_path):
+    rotation = spatial_free_body_rotation.run_analysis(tmp_path / "rotation.json")
+    asymmetric = spatial_asymmetric_top.run_analysis()
+
+    assert rotation["orientation_error"] < 2e-9
+    assert rotation["diagnostics"].max_quaternion_norm_error < 1e-14
+    assert asymmetric["diagnostics"].relative_energy_change < 2e-10
+    assert asymmetric["diagnostics"].relative_angular_momentum_change < 2e-10
