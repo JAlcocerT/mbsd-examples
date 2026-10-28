@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.9.3 - Coupled Six-DOF Rigid-Body Dynamics
+
+- Add a two-body arbitrary-orientation free-fall example with analytic
+  translation checks and complete coupled-result JSON export.
+- Add an equal-and-opposite pair-interaction example demonstrating total
+  linear-momentum balance.
+- Print the unsupported joint, constraint, and reaction-load boundary.
+- Move the examples package to `0.9.3`, require `mbsd>=0.9.3,<0.10`, and pin CI
+  to the paired core `v0.9.3` tag.
+
 ## v0.9.2 - Free-Body Rotational Dynamics
 
 - Add a constant-principal-torque example checked against its analytic angular

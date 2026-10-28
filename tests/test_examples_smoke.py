@@ -33,6 +33,8 @@ from examples import spatial_force_driven_translation
 from examples import spatial_constrained_translation
 from examples import spatial_free_body_rotation
 from examples import spatial_asymmetric_top
+from examples import spatial_coupled_free_fall
+from examples import spatial_coupled_interaction
 
 
 def run_script(path: str) -> str:
@@ -338,3 +340,13 @@ def test_free_body_rotation_examples(tmp_path):
     assert rotation["diagnostics"].max_quaternion_norm_error < 1e-14
     assert asymmetric["diagnostics"].relative_energy_change < 2e-10
     assert asymmetric["diagnostics"].relative_angular_momentum_change < 2e-10
+
+
+def test_coupled_six_dof_examples(tmp_path):
+    free_fall = spatial_coupled_free_fall.run_analysis(tmp_path / "free-fall.json")
+    interaction = spatial_coupled_interaction.run_analysis()
+
+    assert free_fall["error"] < 2e-9
+    assert free_fall["diagnostics"].max_quaternion_norm_error < 1e-14
+    assert interaction["max_momentum"] < 2e-10
+    assert interaction["diagnostics"].max_internal_force_imbalance_n < 1e-14

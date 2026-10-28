@@ -297,6 +297,31 @@ Examples target:
 - an explicit statement that coupled and constrained rotation remain future
   milestones.
 
+## v0.9.3
+
+Coupled six-DOF dynamics supports one or more unconstrained rigid bodies. Every
+body carries center-of-mass translation, a body reference-origin pose,
+body-to-world orientation, world linear velocity, body angular velocity, and
+body-frame inertia. External loads, gravity, and pair interactions record their
+frames and application points.
+
+Acceptance thresholds:
+
+- arbitrary-orientation free fall matches `0.5*g*t^2` within `2e-9 m`;
+- off-center force and pure-couple accelerations match analytic values within
+  `1e-11`;
+- offset-COM pose reconstruction remains within `2e-10 m`;
+- isolated total kinetic energy and inertial angular momentum drift remain
+  below `3e-10`, with linear momentum drift below `1e-12`;
+- equal-and-opposite pair interactions preserve total linear momentum within
+  `2e-10 kg*m/s`;
+- rotated and translated world-frame solutions agree within `2e-9`;
+- exported results contain complete state, load, interaction, gravity, inertia,
+  convention, capability, and solver-provenance records.
+
+Joints, constraint reactions, stabilization, contact, and collision remain
+explicitly unsupported until their later milestones.
+
 ## Later Batches
 
 Good candidates for future weekly releases:

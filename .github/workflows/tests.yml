@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: JAlcocerT/mbsd-core
-          ref: v0.9.2
+          ref: v0.9.3
           path: mbsd-core
 
       - name: Set up Python
