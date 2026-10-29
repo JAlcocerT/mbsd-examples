@@ -11,7 +11,7 @@
     "mbsd.spatial.kinematic_result": [1],
     "mbsd.spatial.fixed_orientation_dynamic_result": [2],
     "mbsd.spatial.free_rigid_body_dynamic_result": [1],
-    "mbsd.spatial.coupled_rigid_body_dynamic_result": [1],
+    "mbsd.spatial.coupled_rigid_body_dynamic_result": [2],
     "mbsd.spatial.constrained_rigid_body_dynamic_result": [1]
   }
 }

@@ -30,7 +30,8 @@ def main() -> None:
     metrics = run_analysis()
     print("Coupled equal-and-opposite interaction")
     print(f"  max total momentum:        {metrics['max_momentum']:.3e} kg*m/s")
-    print(f"  internal force imbalance:  {metrics['diagnostics'].max_internal_force_imbalance_n:.3e} N")
+    imbalance = metrics["diagnostics"].pair_force_balance_residual_n
+    print(f"  pair-force balance residual: {imbalance:.3e} N")
     print("  joints/constraints:        use the v0.9.4 constrained solver")
 
 

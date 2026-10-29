@@ -8,6 +8,8 @@
   velocity histories.
 - Exercise physical reactions, projection, stabilization, and the stable
   spherical/fixed/revolute joint boundary.
+- Consume coupled-result schema version 2 with reproducible simulation
+  identity and portable pair-interaction histories.
 - Move the examples package to `0.9.4`, require `mbsd>=0.9.4,<0.10`, and pin CI
   to the paired core `v0.9.4` tag.
 

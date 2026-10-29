@@ -351,7 +351,7 @@ def test_coupled_six_dof_examples(tmp_path):
     assert free_fall["error"] < 2e-9
     assert free_fall["diagnostics"].max_quaternion_norm_error < 1e-14
     assert interaction["max_momentum"] < 2e-10
-    assert interaction["diagnostics"].max_internal_force_imbalance_n < 1e-14
+    assert interaction["diagnostics"].pair_force_balance_residual_n < 1e-14
 
 
 def test_constrained_rotational_examples(tmp_path):
