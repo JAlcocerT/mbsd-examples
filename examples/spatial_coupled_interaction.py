@@ -31,7 +31,7 @@ def main() -> None:
     print("Coupled equal-and-opposite interaction")
     print(f"  max total momentum:        {metrics['max_momentum']:.3e} kg*m/s")
     print(f"  internal force imbalance:  {metrics['diagnostics'].max_internal_force_imbalance_n:.3e} N")
-    print("  joints/constraints:        unsupported until v0.9.4")
+    print("  joints/constraints:        use the v0.9.4 constrained solver")
 
 
 if __name__ == "__main__":

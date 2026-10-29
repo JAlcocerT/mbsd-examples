@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.9.3
-git -C mbsd-examples checkout v0.9.3
+git -C mbsd-core checkout v0.9.4
+git -C mbsd-examples checkout v0.9.4
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -54,6 +54,8 @@ uv run python examples/spatial_free_body_rotation.py
 uv run python examples/spatial_asymmetric_top.py
 uv run python examples/spatial_coupled_free_fall.py
 uv run python examples/spatial_coupled_interaction.py
+uv run python examples/spatial_dynamic_pendulum.py
+uv run python examples/spatial_driven_hinge.py
 ```
 
 Generate the gallery:
@@ -125,6 +127,8 @@ Generated files remain ignored because their source examples reproduce them.
 | `spatial_asymmetric_top.py` | Torque-free asymmetric body with energy and angular-momentum checks |
 | `spatial_coupled_free_fall.py` | Two arbitrary-orientation rigid bodies under gravity with analytic checks |
 | `spatial_coupled_interaction.py` | Equal-and-opposite pair force with total-momentum validation |
+| `spatial_dynamic_pendulum.py` | Gravity-driven spherical pendulum with reaction and residual export |
+| `spatial_driven_hinge.py` | Torque-driven revolute joint checked against analytic motion |
 
 The spatial examples remain experimental. Version `0.9.1` adds only
 fixed-orientation translational dynamics: world-frame forces at coincident body
@@ -166,3 +170,8 @@ The paired `0.9.3` release adds unconstrained multi-body six-DOF motion,
 gravity, offset centers of mass, external loads, and equal-and-opposite pair
 interactions. Joints, constraint reactions, and contact remain outside the
 solver and are not implied by these examples.
+
+The paired `0.9.4` release adds constrained rotational dynamics for spherical,
+fixed, and revolute joints. It exposes multipliers, physical reaction forces
+and moments, projection controls, stabilization, and mixed-unit constraint-row
+identities. Contact and collision remain unsupported.

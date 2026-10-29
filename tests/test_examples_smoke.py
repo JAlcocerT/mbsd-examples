@@ -35,6 +35,8 @@ from examples import spatial_free_body_rotation
 from examples import spatial_asymmetric_top
 from examples import spatial_coupled_free_fall
 from examples import spatial_coupled_interaction
+from examples import spatial_dynamic_pendulum
+from examples import spatial_driven_hinge
 
 
 def run_script(path: str) -> str:
@@ -350,3 +352,14 @@ def test_coupled_six_dof_examples(tmp_path):
     assert free_fall["diagnostics"].max_quaternion_norm_error < 1e-14
     assert interaction["max_momentum"] < 2e-10
     assert interaction["diagnostics"].max_internal_force_imbalance_n < 1e-14
+
+
+def test_constrained_rotational_examples(tmp_path):
+    pendulum = spatial_dynamic_pendulum.run_analysis(tmp_path / "pendulum.json")
+    hinge = spatial_driven_hinge.run_analysis()
+
+    assert pendulum["diagnostics"].max_position_residual < 1e-8
+    assert pendulum["diagnostics"].max_acceleration_residual < 5e-7
+    assert hinge["angle_error"] < 2e-8
+    assert hinge["speed_error"] < 2e-8
+    assert hinge["diagnostics"].degrees_of_freedom == 1

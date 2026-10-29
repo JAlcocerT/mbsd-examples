@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.9.4 - Constrained Rotational Dynamics
+
+- Add a gravity-driven spherical pendulum with constrained-result JSON and
+  three-level residual reporting.
+- Add a torque-driven revolute hinge checked against analytic angle and angular
+  velocity histories.
+- Exercise physical reactions, projection, stabilization, and the stable
+  spherical/fixed/revolute joint boundary.
+- Move the examples package to `0.9.4`, require `mbsd>=0.9.4,<0.10`, and pin CI
+  to the paired core `v0.9.4` tag.
+
 ## v0.9.3 - Coupled Six-DOF Rigid-Body Dynamics
 
 - Add a two-body arbitrary-orientation free-fall example with analytic

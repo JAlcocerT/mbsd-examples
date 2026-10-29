@@ -36,7 +36,7 @@ def main() -> None:
     print(f"  analytic position error:   {metrics['error']:.3e} m")
     print(f"  quaternion norm error:     {metrics['diagnostics'].max_quaternion_norm_error:.3e}")
     print(f"  result JSON:               {metrics['output']}")
-    print("  joints/constraints:        unsupported until v0.9.4")
+    print("  joints/constraints:        use the v0.9.4 constrained solver")
 
 
 if __name__ == "__main__":

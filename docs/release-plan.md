@@ -322,6 +322,31 @@ Acceptance thresholds:
 Joints, constraint reactions, stabilization, contact, and collision remain
 explicitly unsupported until their later milestones.
 
+## v0.9.4
+
+Constrained rotational dynamics adds spherical, fixed, and five-row revolute
+joints to the coupled rigid-body formulation. Results expose position,
+velocity, and acceleration residuals, multipliers, world reaction forces,
+body-frame reaction moments, projection settings, and stabilization settings.
+
+Acceptance thresholds:
+
+- the gravity-driven pendulum keeps position and velocity residuals below
+  `1e-8` and acceleration residuals below `5e-7`;
+- pendulum mechanical-energy change remains below `2e-7 J` over the documented
+  interval;
+- fixed-body equilibrium and fixed-pair reaction signs agree with analytic
+  force balance within `2e-9`;
+- the torque-driven hinge matches analytic angle and angular velocity within
+  `2e-8`;
+- spherical, fixed, and revolute analytic Jacobians agree with finite
+  differences within their published tolerances;
+- rank-deficient and inconsistent initial conditions fail explicitly;
+- result schemas preserve mixed force/moment units and reaction conventions.
+
+Contact, collision, friction, flexible bodies, and broad joint catalogs remain
+outside this release.
+
 ## Later Batches
 
 Good candidates for future weekly releases:

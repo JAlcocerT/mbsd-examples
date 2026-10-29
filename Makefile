@@ -38,6 +38,8 @@ examples:
 	$(UV) run python examples/spatial_asymmetric_top.py
 	$(UV) run python examples/spatial_coupled_free_fall.py
 	$(UV) run python examples/spatial_coupled_interaction.py
+	$(UV) run python examples/spatial_dynamic_pendulum.py
+	$(UV) run python examples/spatial_driven_hinge.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py
