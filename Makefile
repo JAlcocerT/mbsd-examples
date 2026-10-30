@@ -41,6 +41,9 @@ examples:
 	$(UV) run python examples/spatial_dynamic_pendulum.py
 	$(UV) run python examples/spatial_driven_hinge.py
 	$(UV) run python examples/spatial_interop_handoff.py
+	$(UV) run python examples/planar_joint_loads.py
+	$(UV) run python examples/planar_guardrails.py
+	$(UV) run python examples/planar_penalty_contact.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

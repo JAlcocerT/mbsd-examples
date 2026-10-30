@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.9.6 - Planar Reactions and Guardrails
+
+- Add `planar_joint_loads.py`: slider-crank inverse dynamics with named pin
+  forces, drive torque and power, shaking force, and the
+  `mbsd.planar.joint_loads` v1 export.
+- Add `planar_guardrails.py`: `validate` before solving, `check` after,
+  tabulated-law domain errors, an exact `to_json` / `from_json` round trip, and
+  the structured `NotPortableError` for callable drives.
+- Add `planar_penalty_contact.py`: floor contact as a `force(fn)` callback,
+  keeping contact out of core and reporting the model as non-portable.
+- Add the joint-load and penalty-contact gallery figures.
+- Move the examples package to `0.9.6`, require `mbsd>=0.9.6,<0.10`, and pin CI
+  to the paired core `v0.9.6` tag.
+
 ## v0.9.5 - Reference Interoperability Consumers
 
 - Add one constrained result consumed through the same neutral transform

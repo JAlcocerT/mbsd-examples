@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.9.5
-git -C mbsd-examples checkout v0.9.5
+git -C mbsd-core checkout v0.9.6
+git -C mbsd-examples checkout v0.9.6
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -57,6 +57,9 @@ uv run python examples/spatial_coupled_interaction.py
 uv run python examples/spatial_dynamic_pendulum.py
 uv run python examples/spatial_driven_hinge.py
 uv run python examples/spatial_interop_handoff.py
+uv run python examples/planar_joint_loads.py
+uv run python examples/planar_guardrails.py
+uv run python examples/planar_penalty_contact.py
 ```
 
 Generate the gallery:
@@ -182,3 +185,11 @@ The paired `0.9.5` release hardens constrained identities and schemas, fixes
 hinge motion through 180 degrees and multiple turns, and demonstrates a shared
 engine-neutral transform contract through dependency-free FreeCAD-, Blender-,
 and browser/PWA-oriented mappings.
+
+The paired `0.9.6` release adds planar inverse dynamics and named joint loads
+(`planar_joint_loads.py`: pin forces, drive torque, shaking force, and the
+`mbsd.planar.joint_loads` handoff), the `validate` / `check` guardrails and an
+exact JSON round trip (`planar_guardrails.py`), and penalty contact written as
+a `force(fn)` callback outside core (`planar_penalty_contact.py`). Contact
+stays an example-level model: the callback makes the mechanism non-portable by
+design.

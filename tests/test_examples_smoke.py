@@ -17,6 +17,9 @@ from examples import planar_energy_conservation
 from examples import planar_export_handoff
 from examples import planar_diagnostics_panel
 from examples import planar_four_bar
+from examples import planar_guardrails
+from examples import planar_joint_loads
+from examples import planar_penalty_contact
 from examples import planar_function_fit
 from examples import planar_pendulum
 from examples import planar_precision_synthesis
@@ -375,3 +378,39 @@ def test_spatial_interoperability_consumers_share_one_result(tmp_path):
     assert result["freecad"][1]["object_id"] == result["blender"][1]["object_id"]
     assert result["freecad"][1]["geometry_reference"]["object"] == "Rotor"
     assert result["handoffs"]["freecad"]["target"]["length_scale_from_m"] == 1000.0
+
+
+def test_planar_joint_loads_example(tmp_path):
+    metrics = planar_joint_loads.run_analysis(nsteps=181, output_dir=tmp_path)
+
+    assert metrics["validation_ok"] and metrics["check_passed"]
+    assert metrics["peak_crank_pin_force"] > 0.0
+    assert abs(metrics["mean_power"]) < 1e-6
+    assert metrics["action_reaction_residual"] < 1e-6
+    payload = json.loads((tmp_path / "slider-crank-joint-loads.json").read_text())
+    assert payload["schema"] == "mbsd.planar.joint_loads"
+    assert {joint["name"] for joint in payload["joints"]} == {
+        "main_bearing",
+        "crank_pin",
+        "wrist_pin",
+        "bore",
+    }
+
+
+def test_planar_guardrails_example():
+    report = planar_guardrails.run_analysis()
+
+    assert report["validation"]["ok"] and report["validation"]["portable"]
+    assert report["out_of_table"] == ["time_outside_table"]
+    assert report["check"]["passed"]
+    assert report["replay_identical"]
+    assert report["opaque_portable"] is False
+    assert report["import_error"]["code"] == "not_portable"
+
+
+def test_planar_penalty_contact_example():
+    metrics = planar_penalty_contact.run_analysis(nsteps=601)
+
+    assert 0.1 < metrics["rebound_height"] < metrics["drop_height"]
+    assert 0.0 < metrics["max_penetration"] < 0.02
+    assert metrics["portable"] == 0.0

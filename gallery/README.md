@@ -11,6 +11,8 @@ Generated images:
 - `png/energy-conservation.png`
 - `png/precision-synthesis.png`
 - `png/function-fit.png`
+- `png/slider-crank-joint-loads.png`
+- `png/penalty-contact.png`
 
 Regenerate them with:
 
