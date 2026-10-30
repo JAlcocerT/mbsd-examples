@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.9.5 - Reference Interoperability Consumers
+
+- Add one constrained result consumed through the same neutral transform
+  handoff by FreeCAD-, Blender-, and browser/PWA-oriented mappings.
+- Exercise metre-to-millimetre scaling, quaternion ordering, stable body IDs,
+  shared time grids, external geometry references, and content-derived artifact
+  identity.
+- Consume spatial-model schema v3, constrained-result schema v2, and transform-
+  track handoff schema v1.
+- Keep all reference mappings dependency-free; no external engine is imported.
+- Move the examples package to `0.9.5` and require `mbsd>=0.9.5,<0.10`.
+
 ## v0.9.4 - Constrained Rotational Dynamics
 
 - Add a gravity-driven spherical pendulum with constrained-result JSON and

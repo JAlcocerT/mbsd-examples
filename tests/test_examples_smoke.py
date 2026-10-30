@@ -37,6 +37,7 @@ from examples import spatial_coupled_free_fall
 from examples import spatial_coupled_interaction
 from examples import spatial_dynamic_pendulum
 from examples import spatial_driven_hinge
+from examples import spatial_interop_handoff
 
 
 def run_script(path: str) -> str:
@@ -257,7 +258,7 @@ def test_spatial_vocabulary_metrics(tmp_path):
     metrics = spatial_vocabulary.run_example(tmp_path)
 
     assert metrics["model"]["schema"] == "mbsd.spatial.model"
-    assert metrics["model"]["schema_version"] == 2
+    assert metrics["model"]["schema_version"] == 3
     assert metrics["model"]["status"] == "experimental"
     assert metrics["model"]["conventions"]["world_frame"] == "right_handed_xyz"
     assert metrics["model"]["bodies"][0]["pose"]["translation"] == [1.0, 2.0, 0.5]
@@ -363,3 +364,14 @@ def test_constrained_rotational_examples(tmp_path):
     assert hinge["angle_error"] < 2e-8
     assert hinge["speed_error"] < 2e-8
     assert hinge["diagnostics"].degrees_of_freedom == 1
+
+
+def test_spatial_interoperability_consumers_share_one_result(tmp_path):
+    result = spatial_interop_handoff.run_analysis(tmp_path / "interop")
+
+    assert len(result["freecad"]) == 2
+    assert len(result["blender"]) == 2
+    assert len(result["browser"]["objects"]) == 2
+    assert result["freecad"][1]["object_id"] == result["blender"][1]["object_id"]
+    assert result["freecad"][1]["geometry_reference"]["object"] == "Rotor"
+    assert result["handoffs"]["freecad"]["target"]["length_scale_from_m"] == 1000.0

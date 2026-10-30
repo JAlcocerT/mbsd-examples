@@ -22,8 +22,8 @@ mkdir mbsd-framework
 cd mbsd-framework
 git clone https://github.com/JAlcocerT/mbsd-core.git
 git clone https://github.com/JAlcocerT/mbsd-examples.git
-git -C mbsd-core checkout v0.9.4
-git -C mbsd-examples checkout v0.9.4
+git -C mbsd-core checkout v0.9.5
+git -C mbsd-examples checkout v0.9.5
 cd mbsd-examples
 uv sync --extra dev
 ```
@@ -56,6 +56,7 @@ uv run python examples/spatial_coupled_free_fall.py
 uv run python examples/spatial_coupled_interaction.py
 uv run python examples/spatial_dynamic_pendulum.py
 uv run python examples/spatial_driven_hinge.py
+uv run python examples/spatial_interop_handoff.py
 ```
 
 Generate the gallery:
@@ -129,6 +130,7 @@ Generated files remain ignored because their source examples reproduce them.
 | `spatial_coupled_interaction.py` | Equal-and-opposite pair force with total-momentum validation |
 | `spatial_dynamic_pendulum.py` | Gravity-driven spherical pendulum with reaction and residual export |
 | `spatial_driven_hinge.py` | Torque-driven revolute joint checked against analytic motion |
+| `spatial_interop_handoff.py` | One result consumed by FreeCAD, Blender, and browser reference mappings |
 
 The spatial examples remain experimental. Version `0.9.1` adds only
 fixed-orientation translational dynamics: world-frame forces at coincident body
@@ -175,3 +177,8 @@ The paired `0.9.4` release adds constrained rotational dynamics for spherical,
 fixed, and revolute joints. It exposes multipliers, physical reaction forces
 and moments, projection controls, stabilization, and mixed-unit constraint-row
 identities. Contact and collision remain unsupported.
+
+The paired `0.9.5` release hardens constrained identities and schemas, fixes
+hinge motion through 180 degrees and multiple turns, and demonstrates a shared
+engine-neutral transform contract through dependency-free FreeCAD-, Blender-,
+and browser/PWA-oriented mappings.

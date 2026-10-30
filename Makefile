@@ -40,6 +40,7 @@ examples:
 	$(UV) run python examples/spatial_coupled_interaction.py
 	$(UV) run python examples/spatial_dynamic_pendulum.py
 	$(UV) run python examples/spatial_driven_hinge.py
+	$(UV) run python examples/spatial_interop_handoff.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

@@ -347,6 +347,31 @@ Acceptance thresholds:
 Contact, collision, friction, flexible bodies, and broad joint catalogs remain
 outside this release.
 
+## v0.9.5
+
+Interoperability hardening closes the constrained-result identity and reader
+gaps, moves the spatial model to schema v3, and publishes a neutral transform-
+track schema. The same constrained hinge result is consumed by FreeCAD-,
+Blender-, and browser/PWA-oriented reference mappings without importing any
+external engine into core.
+
+Acceptance thresholds:
+
+- the hinge crosses exactly 180 degrees and completes multiple turns;
+- foreign constrained results are rejected before diagnostics or export;
+- constrained simulation identity changes with drive histories, effective
+  inertia, initial state, stabilization, projection, or solver controls;
+- corrupt masses, poses, reactions, conventions, capabilities, diagnostics,
+  and identities are rejected by the portable reader;
+- translational and rotational balance are independently validated;
+- spatial-model v2 remains readable while revolute models emit v3;
+- FreeCAD, Blender, and browser mappings consume one golden transform artifact;
+- axis, unit, quaternion, time, body ID, and capability metadata are explicit.
+
+This release adds no new physics scope. It productizes the `0.9.4` solver for
+downstream use while contact, collision, friction, and flexible bodies remain
+out of scope.
+
 ## Later Batches
 
 Good candidates for future weekly releases:
