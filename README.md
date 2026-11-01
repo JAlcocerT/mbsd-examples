@@ -60,6 +60,9 @@ uv run python examples/spatial_interop_handoff.py
 uv run python examples/planar_joint_loads.py
 uv run python examples/planar_guardrails.py
 uv run python examples/planar_penalty_contact.py
+uv run python examples/spatial_cardan_joint.py
+uv run python examples/planar_linear_actuator.py
+uv run python examples/planar_rocker_valve.py
 ```
 
 Generate the gallery:
@@ -193,3 +196,8 @@ exact JSON round trip (`planar_guardrails.py`), and penalty contact written as
 a `force(fn)` callback outside core (`planar_penalty_contact.py`). Contact
 stays an example-level model: the callback makes the mechanism non-portable by
 design.
+
+The paired `0.9.7` release adds Cardan shafts (`spatial_cardan_joint.py`), an
+excavator driven by portable linear actuators (`planar_linear_actuator.py`),
+and a rocker-on-valve `point_on_line` contact (`planar_rocker_valve.py`); all
+spatial dynamics examples now use the single `simulate()`.

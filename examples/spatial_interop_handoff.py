@@ -23,7 +23,7 @@ def run_analysis(output_directory: Path) -> dict:
     rotor = mechanism.body("rotor", inertia=(2.0, 3.0, 4.0))
     mechanism.revolute(ground, rotor, name="hinge")
     motor = mechanism.rigid_body_load(rotor, torque=(0.0, 0.0, 4.0))
-    result = mechanism.simulate_constrained_rigid_bodies(
+    result = mechanism.simulate(
         np.linspace(0.0, 1.0, 11), loads=(motor,)
     )
     result_payload = mechanism.constrained_result_to_dict(result)

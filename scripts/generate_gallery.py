@@ -25,10 +25,12 @@ from examples.planar_energy_conservation import save_plot as save_energy_plot  #
 from examples.planar_four_bar import save_plot as save_four_bar_plot  # noqa: E402
 from examples.planar_function_fit import save_plot as save_function_fit_plot  # noqa: E402
 from examples.planar_joint_loads import save_plot as save_joint_loads_plot  # noqa: E402
+from examples.planar_linear_actuator import save_plot as save_linear_actuator_plot  # noqa: E402
 from examples.planar_penalty_contact import save_plot as save_penalty_contact_plot  # noqa: E402
 from examples.planar_pendulum import save_plot as save_pendulum_plot  # noqa: E402
 from examples.planar_precision_synthesis import save_plot as save_precision_synthesis_plot  # noqa: E402
 from examples.planar_scotch_yoke import save_plot as save_scotch_yoke_plot  # noqa: E402
+from examples.spatial_cardan_joint import save_plot as save_cardan_plot  # noqa: E402
 from examples.planar_slider_crank_analysis import build_slider_crank, run_analysis  # noqa: E402
 
 
@@ -139,6 +141,8 @@ def main() -> None:
     save_function_fit_plot(GALLERY / "function-fit.png")
     save_joint_loads_plot(GALLERY / "slider-crank-joint-loads.png")
     save_penalty_contact_plot(GALLERY / "penalty-contact.png")
+    save_linear_actuator_plot(GALLERY / "excavator-cylinders.png")
+    save_cardan_plot(GALLERY / "cardan-speed-ratio.png")
     print(f"Generated gallery in {GALLERY}")
 
 

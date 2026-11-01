@@ -18,7 +18,7 @@ def run_analysis(output: Path) -> dict:
         pose=Pose3D(-rotation.rotate(pivot), rotation),
     )
     mechanism.spherical(ground, body, point_j=pivot, name="pivot")
-    result = mechanism.simulate_constrained_rigid_bodies(
+    result = mechanism.simulate(
         np.linspace(0.0, 1.0, 101), gravity_world=(0.0, -9.81, 0.0),
         stabilization_frequency=10.0, rtol=1e-10, atol=1e-12,
     )

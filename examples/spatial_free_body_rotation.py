@@ -13,25 +13,33 @@ def run_analysis(output: Path) -> dict:
     rotor = mechanism.body("rotor", mass=2.0, inertia=(2.0, 3.0, 4.0))
     motor = mechanism.rigid_body_load(rotor, torque=(2.0, 0.0, 0.0), name="motor")
     times = np.linspace(0.0, 1.0, 101)
-    result = mechanism.simulate_free_body(times, loads=(motor,))
-    diagnostics = mechanism.rigid_body_diagnostics(result)
+    result = mechanism.simulate(times, loads=(motor,), rtol=1e-10, atol=1e-12)
     expected = Quaternion.from_axis_angle((1.0, 0.0, 0.0), 0.5)
     orientation_error = float(np.max(np.abs(
-        result.poses[-1].rotation.to_rotation_matrix() - expected.to_rotation_matrix()
+        result.poses[-1][0].rotation.to_rotation_matrix() - expected.to_rotation_matrix()
     )))
-    mechanism.rigid_body_result_to_json(result, output)
-    return {"result": result, "diagnostics": diagnostics, "orientation_error": orientation_error, "output": output}
+    norm_error = max(
+        abs(float(np.linalg.norm(step[0].rotation.as_array())) - 1.0) for step in result.poses
+    )
+    mechanism.constrained_result_to_json(result, output)
+    return {
+        "result": result,
+        "check": mechanism.check(result),
+        "orientation_error": orientation_error,
+        "quaternion_norm_error": norm_error,
+        "output": output,
+    }
 
 
 def main() -> None:
     output = Path(__file__).parents[1] / "artifacts" / "spatial" / "free-body-rotation.json"
     metrics = run_analysis(output)
-    print("Free rigid-body constant-torque rotation")
+    print("Free rigid-body constant-torque rotation (simulate, no joints)")
     print(f"  result JSON:              {metrics['output']}")
-    print(f"  final angular speed:      {metrics['result'].angular_velocity_body[-1, 0]:.6f} rad/s")
+    print(f"  final angular speed:      {metrics['result'].angular_velocity_body[-1, 0, 0]:.6f} rad/s")
     print(f"  analytic orientation err: {metrics['orientation_error']:.3e}")
-    print(f"  quaternion norm error:    {metrics['diagnostics'].max_quaternion_norm_error:.3e}")
-    print("  constraints/joints:       unsupported by this free-body solver")
+    print(f"  quaternion norm error:    {metrics['quaternion_norm_error']:.3e}")
+    print(f"  check passed:             {metrics['check'].passed}")
 
 
 if __name__ == "__main__":

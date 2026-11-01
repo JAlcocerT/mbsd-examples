@@ -44,6 +44,9 @@ examples:
 	$(UV) run python examples/planar_joint_loads.py
 	$(UV) run python examples/planar_guardrails.py
 	$(UV) run python examples/planar_penalty_contact.py
+	$(UV) run python examples/spatial_cardan_joint.py
+	$(UV) run python examples/planar_linear_actuator.py
+	$(UV) run python examples/planar_rocker_valve.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

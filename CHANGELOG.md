@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.9.7 - Cardan Shafts, Linear Actuators, and One Spatial simulate()
+
+- Add `spatial_cardan_joint.py`: single and double Cardan shafts using
+  `parallel_axes` and `revolute_drive`, checked against the closed-form speed
+  ratio, with the redundant two-revolute-bearing model rejected by `validate()`.
+- Add `planar_linear_actuator.py`: excavator boom and stick driven by two
+  portable `distance_drive` cylinders, with an offset-COM stick, cylinder
+  forces, pivot and chassis loads, and an exact JSON replay.
+- Add `planar_rocker_valve.py`: a `point_on_line` rocker tip on a valve stem,
+  reporting when the valve would float.
+- Move the free-body, coupled, and constrained spatial examples to
+  `SpatialMechanism.simulate()` and `check()`.
+- Rewrite the agent instructions and analysis playbook for the 0.9.7 surface.
+- Add the Cardan and excavator gallery figures.
+- Correct `release-compatibility.json` (it still described 0.9.5), move to
+  `0.9.7`, require `mbsd>=0.9.7,<0.10`, and pin CI to core `v0.9.7`.
+
 ## v0.9.6 - Planar Reactions and Guardrails
 
 - Add `planar_joint_loads.py`: slider-crank inverse dynamics with named pin

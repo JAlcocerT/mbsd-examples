@@ -12,7 +12,7 @@ def run_analysis() -> dict:
     mechanism.revolute(ground, rotor, name="hinge")
     motor = mechanism.rigid_body_load(rotor, torque=(0.0, 0.0, 4.0), name="motor")
     times = np.linspace(0.0, 1.0, 51)
-    result = mechanism.simulate_constrained_rigid_bodies(
+    result = mechanism.simulate(
         times, loads=(motor,), rtol=1e-10, atol=1e-12
     )
     angles = np.asarray([

@@ -38,6 +38,9 @@ from examples import spatial_free_body_rotation
 from examples import spatial_asymmetric_top
 from examples import spatial_coupled_free_fall
 from examples import spatial_coupled_interaction
+from examples import spatial_cardan_joint
+from examples import planar_linear_actuator
+from examples import planar_rocker_valve
 from examples import spatial_dynamic_pendulum
 from examples import spatial_driven_hinge
 from examples import spatial_interop_handoff
@@ -242,7 +245,7 @@ def test_export_handoff_artifacts_are_created(tmp_path):
         point_rows = list(csv.reader(handle))
 
     assert mechanism["schema"] == "mbsd.planar.mechanism"
-    assert mechanism["schema_version"] == 1
+    assert mechanism["schema_version"] == 2
     assert mechanism["units"]["length"] == "m"
     assert mechanism["metadata"]["consumer"] == ["pwa", "cad"]
     assert mechanism["forces"]["springs"][0]["stiffness"] == 25.0
@@ -261,7 +264,7 @@ def test_spatial_vocabulary_metrics(tmp_path):
     metrics = spatial_vocabulary.run_example(tmp_path)
 
     assert metrics["model"]["schema"] == "mbsd.spatial.model"
-    assert metrics["model"]["schema_version"] == 3
+    assert metrics["model"]["schema_version"] == 4
     assert metrics["model"]["status"] == "experimental"
     assert metrics["model"]["conventions"]["world_frame"] == "right_handed_xyz"
     assert metrics["model"]["bodies"][0]["pose"]["translation"] == [1.0, 2.0, 0.5]
@@ -343,9 +346,11 @@ def test_free_body_rotation_examples(tmp_path):
     asymmetric = spatial_asymmetric_top.run_analysis()
 
     assert rotation["orientation_error"] < 2e-9
-    assert rotation["diagnostics"].max_quaternion_norm_error < 1e-14
-    assert asymmetric["diagnostics"].relative_energy_change < 2e-10
-    assert asymmetric["diagnostics"].relative_angular_momentum_change < 2e-10
+    assert rotation["quaternion_norm_error"] < 1e-14
+    assert rotation["check"].passed
+    assert asymmetric["relative_energy_change"] < 2e-10
+    assert asymmetric["relative_angular_momentum_change"] < 2e-10
+    assert asymmetric["check"].passed
 
 
 def test_coupled_six_dof_examples(tmp_path):
@@ -353,9 +358,11 @@ def test_coupled_six_dof_examples(tmp_path):
     interaction = spatial_coupled_interaction.run_analysis()
 
     assert free_fall["error"] < 2e-9
-    assert free_fall["diagnostics"].max_quaternion_norm_error < 1e-14
+    assert free_fall["quaternion_norm_error"] < 1e-14
+    assert free_fall["check"].passed
     assert interaction["max_momentum"] < 2e-10
-    assert interaction["diagnostics"].pair_force_balance_residual_n < 1e-14
+    assert interaction["pair_force_balance_residual_n"] < 1e-14
+    assert interaction["check"].passed
 
 
 def test_constrained_rotational_examples(tmp_path):
@@ -414,3 +421,31 @@ def test_planar_penalty_contact_example():
     assert 0.1 < metrics["rebound_height"] < metrics["drop_height"]
     assert 0.0 < metrics["max_penetration"] < 0.02
     assert metrics["portable"] == 0.0
+
+
+def test_spatial_cardan_joint_example():
+    metrics = spatial_cardan_joint.run_analysis(nsteps=9)
+
+    assert metrics["validation_ok"] and metrics["degrees_of_freedom"] == 0
+    assert "output_bearing" in metrics["redundant_issue"]
+    assert metrics["max_ratio_error"] < 1e-6
+    assert metrics["double_output_error"] < 1e-6
+    assert metrics["intermediate_ratio_range"] > 0.1
+    assert metrics["check_passed"]
+
+
+def test_planar_linear_actuator_example():
+    metrics = planar_linear_actuator.run_analysis(nsteps=11)
+
+    assert metrics["validation_ok"] and metrics["portable"]
+    assert metrics["check_passed"] and metrics["replay_identical"]
+    assert metrics["boom_force"].min() > 0.0  # the boom cylinder pushes
+    assert abs(metrics["chassis_force"][1].mean() + metrics["total_weight"]) < 0.01 * metrics["total_weight"]
+
+
+def test_planar_rocker_valve_example():
+    slow = planar_rocker_valve.run_analysis(speed=1.0, nsteps=41)
+    fast = planar_rocker_valve.run_analysis(speed=6.0, nsteps=41)
+
+    assert slow["portable"] and slow["check_passed"]
+    assert not slow["floats"] and fast["floats"]
