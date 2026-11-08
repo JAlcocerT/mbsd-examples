@@ -1,0 +1,39 @@
+{
+  "fixtures": {
+    "blender-golden.json": {
+      "expect": "import"
+    },
+    "reject-duplicate-id.json": {
+      "expect": "reject"
+    },
+    "reject-edited-content.json": {
+      "expect": "reject"
+    },
+    "reject-force-import.json": {
+      "expect": "reject"
+    },
+    "reject-freecad-target.json": {
+      "expect": "reject"
+    },
+    "reject-geometry-loading.json": {
+      "expect": "reject"
+    },
+    "reject-left-handed.json": {
+      "expect": "reject"
+    },
+    "reject-millimetres.json": {
+      "expect": "reject"
+    },
+    "reject-mirror-axes.json": {
+      "expect": "reject"
+    },
+    "reject-unknown-schema-version.json": {
+      "expect": "reject"
+    },
+    "reject-xyzw-quaternions.json": {
+      "expect": "reject"
+    }
+  },
+  "schema": "mbsd-examples.interop_fixtures",
+  "version": 1
+}

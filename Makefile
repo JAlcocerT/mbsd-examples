@@ -1,4 +1,4 @@
-.PHONY: help sync examples gallery test check clean
+.PHONY: help sync examples gallery test blender fixtures check clean
 
 UV ?= uv
 
@@ -8,6 +8,8 @@ help:
 	@echo "  make examples  Run example scripts"
 	@echo "  make gallery   Generate gallery assets"
 	@echo "  make test      Run pytest"
+	@echo "  make blender   Run the Blender reference consumer on the golden fixtures"
+	@echo "  make fixtures  Regenerate the golden interop fixtures"
 	@echo "  make check     Run tests, examples, gallery, and ruff"
 	@echo "  make clean     Remove generated local outputs"
 
@@ -55,6 +57,14 @@ gallery:
 
 test:
 	$(UV) run pytest -q
+
+BLENDER ?= blender
+blender:
+	$(BLENDER) -b --factory-startup --python examples/adapters/blender_consumer.py -- \
+		fixtures/interop artifacts/interop/blender-report.json
+
+fixtures:
+	$(UV) run python scripts/make_interop_fixtures.py
 
 check: test examples gallery
 	$(UV) run ruff check .

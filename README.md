@@ -204,7 +204,12 @@ excavator driven by portable linear actuators (`planar_linear_actuator.py`),
 and a rocker-on-valve `point_on_line` contact (`planar_rocker_valve.py`); all
 spatial dynamics examples now use the single `simulate()`.
 
-Against the `0.9.8` candidate core: a counter-oscillating agitator with portable
+The paired `0.9.8` release candidate adds the **Blender reference consumer**
+of the neutral adapter contract (`examples/adapters/blender_consumer.py`, run
+with `make blender`): it runs inside Blender without importing mbsd, rejects
+unsupported handoffs before creating anything, and imports the golden
+`fixtures/interop/` handoff with keyframes matching every sample to Blender's
+float32 precision. Also against `0.9.8`: a counter-oscillating agitator with portable
 `rack()` and `gear()` meshes whose inertia torques cancel on the frame
 (`planar_counter_agitator.py`), and a reaction wheel driven relative to its
 platform, conserving angular momentum with an exact power balance from the

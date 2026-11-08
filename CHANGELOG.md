@@ -1,9 +1,22 @@
 # Changelog
 
-## Unreleased - v0.9.8 candidate
+## v0.9.8 - Release Candidate
 
-Requires the unreleased core v0.9.8 candidate (`gear`, `rack`,
-`relative_to`, `DynamicsResult.a`).
+Paired with core v0.9.8 (the 1.0 release candidate); requires
+`mbsd>=0.9.8,<0.10` and pins CI to core `v0.9.8` for the candidate period.
+
+- Add the Blender reference consumer (`examples/adapters/blender_consumer.py`),
+  run headless in Blender with no mbsd import: it checks the transform-track
+  contract before creating anything (capabilities, target, handedness, `wxyz`
+  quaternions, proper axis matrix, metres, unique stable IDs, shared time
+  grid, `artifact_id`), imports one keyframed empty per track with geometry
+  kept as a reference, and measures `matrix_world` against every sample
+  (position 4e-23 m, rotation 3e-7 rad: Blender's float32 floor). `make
+  blender` runs it; `tests/test_blender_consumer.py` runs it when Blender is
+  installed and always checks the contract verdicts.
+- Add golden interop fixtures (`fixtures/interop/`, `make fixtures`): a real
+  Cardan handoff mapped y-up to Blender z-up with geometry references, and
+  ten variants that each break exactly one rule and must be rejected.
 
 - Add `planar_counter_agitator.py`: crank, connecting rod, rack-and-pinion
   and a reverser as portable `rack()` / `gear()` meshes. The paddle sets swing

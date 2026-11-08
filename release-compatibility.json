@@ -1,8 +1,15 @@
 {
-  "release": "0.9.7",
-  "core_ref": "v0.9.7",
-  "examples_ref": "v0.9.7",
-  "core_range": ">=0.9.7,<0.10",
+  "release": "0.9.8",
+  "status": "release_candidate",
+  "core_ref": "v0.9.8",
+  "examples_ref": "v0.9.8",
+  "core_range": ">=0.9.8,<0.10",
+  "reference_consumer": {
+    "engine": "blender",
+    "tested_version": "5.1.2",
+    "script": "examples/adapters/blender_consumer.py",
+    "fixtures": "fixtures/interop/manifest.json"
+  },
   "consumed_schemas": {
     "mbsd.planar.mechanism": [2, 3],
     "mbsd.planar.result": [1],
