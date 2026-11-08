@@ -60,7 +60,9 @@ def test_golden_fixture_is_reproducible():
     for a, b in zip(fresh["tracks"], golden["tracks"]):
         for sa, sb in zip(a["samples"], b["samples"]):
             assert np.allclose(sa["translation"], sb["translation"], atol=1e-9)
-            assert np.allclose(sa["rotation_wxyz"], sb["rotation_wxyz"], atol=1e-9)
+            # q and -q are the same rotation; at a half turn (w ~ 0) the sign is set by round-off.
+            qa, qb = np.asarray(sa["rotation_wxyz"]), np.asarray(sb["rotation_wxyz"])
+            assert min(np.max(np.abs(qa - qb)), np.max(np.abs(qa + qb))) < 1e-9
 
 
 def _blender():
