@@ -4,10 +4,10 @@
   "examples_ref": "v0.9.7",
   "core_range": ">=0.9.7,<0.10",
   "consumed_schemas": {
-    "mbsd.planar.mechanism": [2],
+    "mbsd.planar.mechanism": [2, 3],
     "mbsd.planar.result": [1],
     "mbsd.planar.point_trace": [1],
-    "mbsd.planar.joint_loads": [2],
+    "mbsd.planar.joint_loads": [2, 3],
     "mbsd.spatial.model": [4],
     "mbsd.spatial.kinematic_result": [1],
     "mbsd.spatial.fixed_orientation_dynamic_result": [2],

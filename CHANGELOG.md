@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased - v0.9.8 candidate
+
+Requires the unreleased core v0.9.8 candidate (`gear`, `rack`,
+`relative_to`, `DynamicsResult.a`).
+
+- Add `planar_counter_agitator.py`: crank, connecting rod, rack-and-pinion
+  and a reverser as portable `rack()` / `gear()` meshes. The paddle sets swing
+  opposite and their inertia torques cancel on the frame; same-direction and
+  unmatched-inertia variants quantify it. The pinion is phased at the
+  slider-crank's true mid-stroke.
+- Add `planar_internal_motor.py`: a reaction wheel driven relative to its
+  platform keeps the total angular momentum at zero and puts no torque on the
+  frame; the absolute-drive variant shows the difference. The power balance
+  uses the solved accelerations (`result.a`).
+- `release-compatibility.json` consumes planar mechanism and joint-loads v3.
+
 ## v0.9.7 - Cardan Shafts, Linear Actuators, and One Spatial simulate()
 
 - Add `spatial_cardan_joint.py`: single and double Cardan shafts using

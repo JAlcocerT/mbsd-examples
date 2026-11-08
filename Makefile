@@ -47,6 +47,8 @@ examples:
 	$(UV) run python examples/spatial_cardan_joint.py
 	$(UV) run python examples/planar_linear_actuator.py
 	$(UV) run python examples/planar_rocker_valve.py
+	$(UV) run python examples/planar_counter_agitator.py
+	$(UV) run python examples/planar_internal_motor.py
 
 gallery:
 	$(UV) run python scripts/generate_gallery.py

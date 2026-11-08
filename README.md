@@ -63,6 +63,8 @@ uv run python examples/planar_penalty_contact.py
 uv run python examples/spatial_cardan_joint.py
 uv run python examples/planar_linear_actuator.py
 uv run python examples/planar_rocker_valve.py
+uv run python examples/planar_counter_agitator.py
+uv run python examples/planar_internal_motor.py
 ```
 
 Generate the gallery:
@@ -201,3 +203,9 @@ The paired `0.9.7` release adds Cardan shafts (`spatial_cardan_joint.py`), an
 excavator driven by portable linear actuators (`planar_linear_actuator.py`),
 and a rocker-on-valve `point_on_line` contact (`planar_rocker_valve.py`); all
 spatial dynamics examples now use the single `simulate()`.
+
+Against the `0.9.8` candidate core: a counter-oscillating agitator with portable
+`rack()` and `gear()` meshes whose inertia torques cancel on the frame
+(`planar_counter_agitator.py`), and a reaction wheel driven relative to its
+platform, conserving angular momentum with an exact power balance from the
+solved accelerations (`planar_internal_motor.py`).

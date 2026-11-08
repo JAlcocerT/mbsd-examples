@@ -41,6 +41,8 @@ from examples import spatial_coupled_interaction
 from examples import spatial_cardan_joint
 from examples import planar_linear_actuator
 from examples import planar_rocker_valve
+from examples import planar_counter_agitator
+from examples import planar_internal_motor
 from examples import spatial_dynamic_pendulum
 from examples import spatial_driven_hinge
 from examples import spatial_interop_handoff
@@ -245,7 +247,7 @@ def test_export_handoff_artifacts_are_created(tmp_path):
         point_rows = list(csv.reader(handle))
 
     assert mechanism["schema"] == "mbsd.planar.mechanism"
-    assert mechanism["schema_version"] == 2
+    assert mechanism["schema_version"] == 3
     assert mechanism["units"]["length"] == "m"
     assert mechanism["metadata"]["consumer"] == ["pwa", "cad"]
     assert mechanism["forces"]["springs"][0]["stiffness"] == 25.0
@@ -449,3 +451,30 @@ def test_planar_rocker_valve_example():
 
     assert slow["portable"] and slow["check_passed"]
     assert not slow["floats"] and fast["floats"]
+
+
+def test_planar_counter_agitator_example():
+    metrics = planar_counter_agitator.run_analysis(nsteps=61)
+
+    assert metrics["validation_ok"] and metrics["portable"]
+    assert metrics["check_passed"] and metrics["replay_identical"]
+    assert metrics["counter_rotation_error"] < 1e-12
+    # Mid-stroke phase: the swing is symmetric about zero.
+    assert abs(metrics["swing_deg"].max() + metrics["swing_deg"].min()) < 0.5
+    opposite = np.abs(metrics["frame_torque_opposite"]).max()
+    same = np.abs(metrics["frame_torque_same"]).max()
+    unmatched = np.abs(metrics["frame_torque_unmatched"]).max()
+    assert same > 100.0 * opposite
+    assert opposite < unmatched < same
+
+
+def test_planar_internal_motor_example():
+    metrics = planar_internal_motor.run_analysis(nsteps=41)
+    relative, absolute = metrics["relative"], metrics["absolute"]
+
+    assert np.abs(relative["momentum"]).max() < 1e-10
+    assert np.abs(relative["frame_torque"]).max() < 1e-10
+    assert metrics["platform_rate_error"] < 1e-9
+    assert relative["power_balance"] < 1e-9
+    assert np.abs(absolute["frame_torque"]).max() > 0.1
+    assert relative["check_passed"] and absolute["check_passed"]
