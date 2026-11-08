@@ -59,10 +59,12 @@ def test_golden_fixture_is_reproducible():
     assert [t["id"] for t in fresh["tracks"]] == [t["id"] for t in golden["tracks"]]
     for a, b in zip(fresh["tracks"], golden["tracks"]):
         for sa, sb in zip(a["samples"], b["samples"]):
-            assert np.allclose(sa["translation"], sb["translation"], atol=1e-9)
+            # Across platforms the simulation differs by round-off (~1e-9); the
+            # fixture only has to reproduce well inside Blender's float32 (~3e-7).
+            assert np.allclose(sa["translation"], sb["translation"], atol=1e-7)
             # q and -q are the same rotation; at a half turn (w ~ 0) the sign is set by round-off.
             qa, qb = np.asarray(sa["rotation_wxyz"]), np.asarray(sb["rotation_wxyz"])
-            assert min(np.max(np.abs(qa - qb)), np.max(np.abs(qa + qb))) < 1e-9
+            assert min(np.max(np.abs(qa - qb)), np.max(np.abs(qa + qb))) < 1e-7
 
 
 def _blender():
